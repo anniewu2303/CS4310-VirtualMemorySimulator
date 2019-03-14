@@ -4,7 +4,7 @@
  */
 public class TLB {
     private TlbEntries entries[];
-    private final static int DEFAULT_MAX_ENTRIES = 4;
+    private final static int DEFAULT_MAX_ENTRIES = 16;
 
     public TLB() {
         this(DEFAULT_MAX_ENTRIES);
