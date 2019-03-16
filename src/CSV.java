@@ -10,7 +10,7 @@ public class CSV {
         output();
     }
     
-    public stic void rw(int r) {
+    public void rw(int r) {
         rw = r + "";
         output();
     }
@@ -20,7 +20,7 @@ public class CSV {
         output();
     }
     
-    public static void soft(int s) {
+    public void soft(int s) {
         soft = s + "";
         output();
     }
