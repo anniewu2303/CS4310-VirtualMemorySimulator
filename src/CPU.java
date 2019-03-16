@@ -14,7 +14,7 @@ Your CPU will read them, hand them to the MMU for fetching or writing.
 
 public class CPU {
     
-    public static void readFile(String fileName) throws FileNotFoundException {
+    public void readFile(String fileName) throws FileNotFoundException {
         File file = new File(fileName);
         Scanner scan = new Scanner(file);
         int counter = 0; //counter for number of instructions 
