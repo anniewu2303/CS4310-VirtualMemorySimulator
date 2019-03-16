@@ -23,14 +23,14 @@ public class CPU {
             int rw = scan.nextInt(); //get read/write bit
             CSV.rw(rw); 
             
-            if (rw == 0) { //read 
+            if (rw == 0) { //read value
                 String address = scan.next();
                 CSV.address(address);
-				int value = MMU.read(address); 
+		int value = MMU.read(address); 
                 CSV.value(value);
                 counter++;
             }
-            if (rw == 1) { //write 
+            if (rw == 1) { //write value
                 String address = scan.next();
                 CSV.address(address);
                 int value = scan.nextInt();
