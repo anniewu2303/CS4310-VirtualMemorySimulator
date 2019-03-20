@@ -8,13 +8,14 @@
  Date:          24 March 2019 
 
 
-Your program will accept as a command line argument the test file path to a text file populated with virtual memory
+- Your program will accept as a command line argument the test file path to a text file populated with virtual memory
 addresses (in hex and also provided with this project) that are used to simulate memory accesses called by a process.
 
-Your CPU will read them, hand them to the MMU for fetching or writing. 
- - If the address is preceded by a zero, then the MMU should only read value. 
- - If the address is preceded by a one, then the address will be followed by an integer value that needs to be 
- written to physical memory. 
+- Your CPU will read them, hand them to the MMU for fetching or writing. 
+    - If the address is preceded by a zero, then the MMU should only read value. 
+    - If the address is preceded by a one, then the address will be followed by an integer value that needs to be 
+    written to physical memory. 
+ 
 */
 
 import java.io.*;
@@ -34,7 +35,7 @@ public class CPU {
             if (rw == 0) { //read value
                 String address = scan.next();
                 CSV.address(address);
-				int value = MMU.read(address); 
+		        int value = MMU.read(address); 
                 CSV.value(value);
                 counter++;
             }
