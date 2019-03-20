@@ -15,8 +15,8 @@ public class VirtualPageTable {
 	Initialize array of page table entries
 	*/
 	public void start() {
-		table = new PageTableEntry[256];
-		for (int x=0; x<256; x++) {
+		table = new PageTableEntry[   ]; 
+		for (int x=0; x<   ; x++) {
 			table[x] = new PageTableEntry(0, 0, 0, -1); //V, R, D, frame#
 		}
 	}
