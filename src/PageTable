@@ -45,7 +45,7 @@ public class VirtualPageTable {
 		table[pageNumber].setValid(1);
 		table[pageNumber].setR(1);
 		table[pageNumber].setDirty(0);
-    }
+  	}
 
 	/*
 	Get dirty bit from table at this page number
