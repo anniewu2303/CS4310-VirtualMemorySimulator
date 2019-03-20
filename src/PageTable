@@ -17,18 +17,18 @@ Table entry for the virtual page table:
 
 public class VirtualPageTable {
 
-	private PageTableEntry[] table;
-	private int index = 0; //index in page table 
+    private PageTableEntry[] table;
+    private int index = 0; //index in page table 
     
-	/*
-	Initialize array of page table entries
-	*/
-	public void start() {
-		table = new PageTableEntry[   ]; 
-		for (int x=0; x<   ; x++) {
-			table[x] = new PageTableEntry(0, 0, 0, -1); //V, R, D, frame#
-		}
-	}
+    /*
+    Initialize array of page table entries
+    */
+    public void start() {
+        table = new PageTableEntry[   ]; 
+        for (int x=0; x<   ; x++) {
+            table[x] = new PageTableEntry(0, 0, 0, -1); //V, R, D, frame#
+        }
+    }
 
 	/*
 	Check if page number is in the table. 
@@ -41,60 +41,60 @@ public class VirtualPageTable {
 		//if the page number is valid in the page table, get the frame number 
 		if (table[pageNumber].getValid() == 1) {
 			frameNumber = table[pageNumber].getFrame();
-		}
-        
-		return frameNumber;
-	}
-
-	/*
-	Update an entry at this page number with this frame number
-	*/
-	public void update(int pageNumber, int frameNumber) {
-		table[pageNumber].setFrame(frameNumber);
-		table[pageNumber].setValid(1);
-		table[pageNumber].setR(1);
-		table[pageNumber].setDirty(0);
-  	}
-
-	/*
-	Get dirty bit from table at this page number
-	*/
-	public int getDirtyBit(int pageNumber) {
-		return table[pageNumber].getDirtyBit();
-	}
+        }
     
-	/*
-	Set dirty bit to 1 at this page number
-	*/
-	public void setDirtyBit(int pageNumber) {
-		table[pageNumber].setDirtyBit(1);
-	}
-    
-	/*
-	Get reference bit from the table at this page number
-	*/
-	public int getStartingRef(int pageNumber) {
-		return table[pageNumber].getRefBit();
-	}
+        return frameNumber;
+    }
 
-	/*
-	Set reference bit to 1 at this page number
-	*/
-	public void setRefBit(int pageNumber) {
-		table[pageNumber].setRefBit(1);
-	}
+    /*
+    Update an entry at this page number with this frame number
+    */
+    public void update(int pageNumber, int frameNumber) {
+        table[pageNumber].setFrame(frameNumber);
+        table[pageNumber].setValid(1);
+        table[pageNumber].setR(1);
+        table[pageNumber].setDirty(0);
+    }
+
+    /*
+    Get dirty bit from table at this page number
+    */
+    public int getDirtyBit(int pageNumber) {
+        return table[pageNumber].getDirtyBit();
+    }
     
-	/*
-	Reset reference bit to 0 at this page number
-	*/
-	public void resetRefBit(int pageNumber) {
-		table[pageNumber].setRefBit(0);
-	}
+    /*
+    Set dirty bit to 1 at this page number
+    */
+    public void setDirtyBit(int pageNumber) {
+        table[pageNumber].setDirtyBit(1);
+    }
+    
+    /*
+    Get reference bit from the table at this page number
+    */
+    public int getStartingRef(int pageNumber) {
+        return table[pageNumber].getRefBit();
+    }
+
+    /*
+    Set reference bit to 1 at this page number
+    */
+    public void setRefBit(int pageNumber) {
+        table[pageNumber].setRefBit(1);
+    }
+    
+    /*
+    Reset reference bit to 0 at this page number
+    */
+    public void resetRefBit(int pageNumber) {
+        table[pageNumber].setRefBit(0);
+    }
 	
-	/*
-	Get index in page table
-	*/
-	public int getTableIndex() {
-		return index;
-	}
+    /*
+    Get index in page table
+    */
+    public int getTableIndex() {
+        return index;
+    }
 }
