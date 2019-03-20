@@ -27,7 +27,7 @@ public class CSV {
     private String address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage;
     
     /*
-        + "" turns the parameter into a string 
+        + "" turns the parameter into a string for writing to output file
     */
     
     
@@ -102,5 +102,12 @@ public class CSV {
         if () {
             
         }
+    }
+    
+    /*
+    Format output file test_#.csv
+    */
+    public void createOutputFile(String fileName) {
+        
     }
 }
