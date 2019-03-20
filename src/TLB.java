@@ -1,7 +1,22 @@
-/**
- * @author Joshua Chen
- * Date Created: Mar 14, 2019
- */
+/*
+ Author:        Joshua Chen
+                Annie Wu 
+				
+ Assignment:    Program 2 
+ Class:         CS 4310 - Operating Systems 
+ Instructor:    Dominick Atanasio 
+ Date:          24 March 2019 
+ 
+ 
+The TLB will be a one-dimensional array if TlbEntries. 
+A TlbEntry consists of a virtual page number and a frame number. 
+The TLB is small and must be scanned on every lookup. 
+The arrays used to implement the page table and TLB will be arrays of data structures that represent the tables’ entries.
+
+Table entry for the TLB:
+    | V-Page# | V | R | D | PageFrame# |
+*/
+
 public class TLB {
     private TlbEntries entries[];
     private final static int DEFAULT_MAX_ENTRIES = 16;
