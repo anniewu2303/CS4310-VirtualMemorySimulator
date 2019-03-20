@@ -1,3 +1,8 @@
+/*
+Table entry for the virtual page table:
+	| V | R | D | PageFrame# |
+*/
+
 public class PageTableEntry {
 	private int valid, ref, dirty, frame;
 
@@ -8,36 +13,36 @@ public class PageTableEntry {
 		this.frame = frame;
     }
     
-    public int getValidBit() {
-        return valid;
-    }
+	public int getValidBit() {
+		return valid;
+	}
     
-    public void setValidBit(int v) {
-        valid = v;
-    }
+	public void setValidBit(int v) {
+		valid = v;
+	}
     
-    public int getRefBit() {
-        return ref;
-    }
+	public int getRefBit() {
+		return ref;
+	}
     
-    public void setRefBit(int r) {
-        ref = r;
-    }
+	public void setRefBit(int r) {
+		ref = r;
+	}
     
-    public int getDirtyBit() {
-        return dirty;
-    }
+	public int getDirtyBit() {
+		return dirty;
+	}
 
-     public void setDirtyBit (int d) {
-        dirty = d;
-    }
+	public void setDirtyBit (int d) {
+		dirty = d;
+	}
 
-    public int getFrameNum() {
-        return frame;
-    }
+	public int getFrameNum() {
+		return frame;
+	}
 
-    public void setFrameNum(int f) {
-        frame = f;
-    }
+	public void setFrameNum(int f) {
+		frame = f;
+	}
        
 }
