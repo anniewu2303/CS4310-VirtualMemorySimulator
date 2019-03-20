@@ -30,11 +30,17 @@ entry of the page being called for after the CPU traps to the OS. You can use th
 
 public class MMU {
 
+	/*
+    Read value from physical memory
+    */
     public int readValue(String thisAddress) {
   
     }
-  
-    public void writeValue(String thisAddress, int value) {
+    
+    /*
+    Write this value to physical memory
+    */
+    public void writeValue(String thisAddress, int thisValue) {
 
     }
 
