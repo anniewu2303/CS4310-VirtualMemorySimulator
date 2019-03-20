@@ -1,7 +1,18 @@
-/**
- * @author Joshua Chen
- * Date Created: Mar 14, 2019
- */
+/*
+ Author:        Joshua Chen
+                Annie Wu 
+				
+ Assignment:    Program 2 
+ Class:         CS 4310 - Operating Systems 
+ Instructor:    Dominick Atanasio 
+ Date:          24 March 2019 
+
+
+Table entry for TLB:
+	| V-Page# | V | R | D | PageFrame# |
+*/
+
+
 public class TlbEntries {
     private String vpn;         // Virtual Page Number
     private int frame_num;
