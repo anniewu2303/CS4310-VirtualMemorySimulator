@@ -1,10 +1,10 @@
 /*
 Author:				Joshua Chen
 					Annie Wu 
-Assignment:         Program 2 
-Class:              CS 4310 - Operating Systems 
-Instructor:         Dominick Atanasio 
-Date:               24 March 2019 
+Assignment:			Program 2 
+Class:				CS 4310 - Operating Systems 
+Instructor:			Dominick Atanasio 
+Date:				24 March 2019 
 
 
 Your program will accept as a command line argument the test file path to a text file populated with virtual memory
