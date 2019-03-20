@@ -1,3 +1,13 @@
+/*
+ Author:        Joshua Chen
+                Annie Wu 
+				
+ Assignment:    Program 2 
+ Class:         CS 4310 - Operating Systems 
+ Instructor:    Dominick Atanasio 
+ Date:          24 March 2019 
+*/
+
 public class CSV {
     
     private String address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage;
