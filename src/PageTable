@@ -50,10 +50,10 @@ public class VirtualPageTable {
     Update an entry at this page number with this frame number
     */
     public void update(int pageNumber, int frameNumber) {
-        table[pageNumber].setFrame(frameNumber);
-        table[pageNumber].setValid(1);
-        table[pageNumber].setR(1);
-        table[pageNumber].setDirty(0);
+        table[pageNumber].setFrame(frameNumber);    
+        table[pageNumber].setValid(1);              //valid
+        table[pageNumber].setR(1);                  //just referneced
+        table[pageNumber].setDirty(0);              //not written to
     }
 
     /*
