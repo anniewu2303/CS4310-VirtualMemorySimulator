@@ -1,0 +1,43 @@
+public class PageTableEntry {
+	private int valid, ref, dirty, frame;
+
+	public PageTableEntry(int valid, int ref, int dirty, int frame) {
+		this.valid = valid;
+		this.ref = ref;
+		this.dirty = dirty;
+		this.frame = frame;
+    }
+    
+    public int getValidBit() {
+        return valid;
+    }
+    
+    public void setValidBit(int v) {
+        valid = v;
+    }
+    
+    public int getRefBit() {
+        return ref;
+    }
+    
+    public void setRefBit(int r) {
+        ref = r;
+    }
+    
+    public int getDirtyBit() {
+        return dirty;
+    }
+
+     public void setDirtyBit (int d) {
+        dirty = d;
+    }
+
+    public int getFrameNum() {
+        return frame;
+    }
+
+    public void setFrameNum(int f) {
+        frame = f;
+    }
+       
+}
