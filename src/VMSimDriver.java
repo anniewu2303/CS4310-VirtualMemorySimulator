@@ -45,7 +45,7 @@ public class VMSimDriver {
         clock.start(); //initialize clock algorithm
         
         CSV csv = new CSV();
-        csv.setOutputFileName(file); //create csv output file
+        csv.createOutputFile(file + ".csv"); //create csv output file
         
         CPU cpu = new CPU();
         cpu.readFile(file); //read test file
