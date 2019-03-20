@@ -90,10 +90,7 @@ public class CSV {
         dirtyEvictedPage = d + "";
         output();
     }
-    
-    /*
-    Header of the CSV file
-    */
+
     public void header() {
         System.out.println("Address, r/w, value, soft, hard, hit, evicted_pg#, dirty_evicted_page");
     }
@@ -106,12 +103,4 @@ public class CSV {
             
         }
     }
-
-    /*
-    Format output file name to test_#-output.csv
-    */
-    public void setOutputFileName(String string) {
-        
-    }
-    
 }
