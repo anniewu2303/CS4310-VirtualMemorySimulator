@@ -28,4 +28,32 @@ public class TLB {
     public TLB(int max_entries) {
         this.entries = new TlbEntries[max_entries];
     }
+    
+    /*
+    Initialize TLB
+    */
+    public void start() {
+
+    }
+    
+    /*
+    Check if page number is in the TLB. 
+	*/
+    public int checkPageNumber(int pageNumber) {
+
+    }
+
+    /*
+    Update this page number in TLB with this frame number
+    */
+    public void update(int pageNumber, int frameNumber) {
+
+    }
+
+    /*
+    Update dirty bit
+    */
+    public void updateDirtyBit(int pageNumber) {
+
+    }
 }
