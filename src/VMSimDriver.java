@@ -30,6 +30,26 @@ public class VMSimDriver {
         System.out.println("Enter location of your input file: ");
         String file = scan.nextLine();
         scan.close();
+
         
+        //get file
+        
+        
+        PageTable pt = new PageTable();
+        pt.start(); //initialize page table
+        
+        TLB tlb = new TLB();
+        tlb.start(); //initialize TLB
+        
+        Clock clock = new Clock();
+        clock.start(); //initialize clock algorithm
+        
+        CSV csv = new CSV();
+        csv.setOutputFileName(file); //create csv output file
+        
+        CPU cpu = new CPU();
+        cpu.readFile(file); //read test file
+        
+        csv.output(); //output to csv file
     }
 }
