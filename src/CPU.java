@@ -1,6 +1,12 @@
-import java.io.*;
-import java.util.*;
-
+/*
+ * Author:              Joshua Chen
+ *                      Annie Wu 
+ *
+ * Assignment:          Program 2 
+ * Class:               CS 4310 - Operating Systems 
+ * Instructor:          Dominick Atanasio 
+ * Date:                24 March 2019 
+ */
 
 /*
 Your program will accept as a command line argument the test file path to a text file populated with virtual memory
@@ -11,6 +17,9 @@ Your CPU will read them, hand them to the MMU for fetching or writing.
  - If the address is preceded by a one, then the address will be followed by an integer value that needs to be 
  written to physical memory. 
 */
+
+import java.io.*;
+import java.util.*;
 
 public class CPU {
     
@@ -26,10 +35,11 @@ public class CPU {
             if (rw == 0) { //read value
                 String address = scan.next();
                 CSV.address(address);
-		int value = MMU.read(address); 
+				int value = MMU.read(address); 
                 CSV.value(value);
                 counter++;
             }
+			
             if (rw == 1) { //write value
                 String address = scan.next();
                 CSV.address(address);
@@ -47,6 +57,7 @@ public class CPU {
             
             CSV.output(); 
         }
+		
     scan.close();
     }
 }
