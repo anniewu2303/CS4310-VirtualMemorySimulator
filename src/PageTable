@@ -81,7 +81,7 @@ public class VirtualPageTable {
 	Set reference bit to 1 at this page number
 	*/
 	public void setRefBit(int pageNumber) {
-		table[pageNumber].setR(1);
+		table[pageNumber].setRefBit(1);
 	}
     
 	/*
