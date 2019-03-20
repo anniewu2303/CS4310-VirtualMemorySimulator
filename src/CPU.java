@@ -1,6 +1,6 @@
 /*
 Author:				Joshua Chen
-					Annie Wu 
+				Annie Wu 
 Assignment:			Program 2 
 Class:				CS 4310 - Operating Systems 
 Instructor:			Dominick Atanasio 
