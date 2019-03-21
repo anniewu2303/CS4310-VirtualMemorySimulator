@@ -13,36 +13,37 @@ Table entry for the virtual page table:
 */
 
 public class PageTableEntry {
-    private int valid, ref, dirty, frame;
+    private int frame;
+    private boolean valid, ref, dirty;
 
-    public PageTableEntry(int valid, int ref, int dirty, int frame) {
+    public PageTableEntry(boolean valid, boolean ref, boolean dirty, int frame) {
         this.valid = valid;
         this.ref = ref;
         this.dirty = dirty;
         this.frame = frame;
     }
     
-    public int getValidBit() {
+    public boolean getValidBit() {
         return valid;
     }
     
-    public void setValidBit(int v) {
+    publicvoid setValidBit(boolean v) {
         valid = v;
     }
     
-    public int getRefBit() {
+    public boolean getRefBit() {
         return ref;
     }
     
-	public void setRefBit(int r) {
-		ref = r;
-	}
+    public void setRefBit(boolean r) {
+        ref = r;
+    }
     
-    public int getDirtyBit() {
+    public boolean getDirtyBit() {
         return dirty;
     }
 
-    public void setDirtyBit (int d) {
+    public void setDirtyBit (boolean d) {
         dirty = d;
     }
 
