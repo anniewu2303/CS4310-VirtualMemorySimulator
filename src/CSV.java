@@ -99,9 +99,7 @@ public class CSV {
     Output to CSV file if we have all of the info 
     */
     public void output() {
-        if () {
-            
-        }
+
     }
     
     /*
