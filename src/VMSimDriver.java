@@ -82,7 +82,6 @@ public class VMSimDriver {
                     pageFrame = address.substring(0, 2);
                     pageIndex = Integer.parseInt(address.substring(2), 16);
                     newValue = Integer.parseInt(testFile.nextLine());
-
             }
         }
 

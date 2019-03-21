@@ -1,43 +1,58 @@
-/**
- * @author Joshua Chen
- * Date Created: Mar 21, 2019
- */
+/*
+ Author:        Joshua Chen
+                Annie Wu 
+				
+ Assignment:    Program 2 
+ Class:         CS 4310 - Operating Systems 
+ Instructor:    Dominick Atanasio 
+ Date:          24 March 2019 
+
+
+Table entry for the virtual page table:
+	| V | R | D | PageFrame# |
+*/
+
 public class PageTableEntry {
-    private int pageFrameNum;
-    private boolean validBit, refBit, dirtyBit;
+    private int frame;
+    private boolean valid, ref, dirty;
 
-    public PageTableEntry(int pageFrameNum) {
-        this.pageFrameNum = pageFrameNum;
-        this.validBit = true;   // If in TLB, then it exists in the page table
-        this.refBit = true;     // If in TLB, then it just got referenced
-        this.dirtyBit = false;  // Not necessarily had it's value changed.
+    public PageTableEntry(boolean valid, boolean ref, boolean dirty, int frame) {
+        this.valid = valid;
+        this.ref = ref;
+        this.dirty = dirty;
+        this.frame = frame;
+    }
+    
+    public boolean getValidBit() {
+        return valid;
+    }
+    
+    publicvoid setValidBit(boolean v) {
+        valid = v;
+    }
+    
+    public boolean getRefBit() {
+        return ref;
+    }
+    
+    public void setRefBit(boolean r) {
+        ref = r;
+    }
+    
+    public boolean getDirtyBit() {
+        return dirty;
     }
 
-    public int getPageFrameNum() {
-        return pageFrameNum;
+    public void setDirtyBit (boolean d) {
+        dirty = d;
     }
 
-    public boolean isValidBit() {
-        return validBit;
+    public int getFrame_Num() {
+        return frame;
     }
 
-    public void setValidBit(boolean validBit) {
-        this.validBit = validBit;
+    public void setFrame_Num(int f) {
+        frame = f;
     }
-
-    public boolean isRefBit() {
-        return refBit;
-    }
-
-    public void setRefBit(boolean refBit) {
-        this.refBit = refBit;
-    }
-
-    public boolean isDirtyBit() {
-        return dirtyBit;
-    }
-
-    public void setDirtyBit(boolean dirtyBit) {
-        this.dirtyBit = dirtyBit;
-    }
+       
 }
