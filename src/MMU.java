@@ -1,5 +1,4 @@
-
-/*
+/**
  Author:        Joshua Chen
                 Annie Wu 
 				

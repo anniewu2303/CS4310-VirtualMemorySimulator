@@ -1,16 +1,16 @@
 /**
  * @author: Joshua Chen
- * Annie Wu
- * <p>
+ *          Annie Wu
+ *
  * Assignment:    Program 2
  * Class:         CS 4310 - Operating Systems
  * Instructor:    Dominick Atanasio
  * Date:          24 March 2019
- * <p>
- * <p>
+ *
+ *
  * Your program will accept as a command line argument the test file path to a text file populated with virtual memory
  * addresses (in hex and also provided with this project) that are used to simulate memory accesses called by a process.
- * <p>
+ *
  * - For each test file that you run, you should use an original copy of the page files that are available with the project.
  * - You do not want altered page files of a previous runs to be used.
  * - Keep the originals in a safe place and overwrite the working set for each simulation.
@@ -74,6 +74,7 @@ public class VMSimDriver {
                         }
                         page.nextLine();
                     }
+
                     log.printf("Read Page Frame %2s, Index %2s: %d\n", pageFrame, pageIndex, currValue);
                     break;
                 // Write
