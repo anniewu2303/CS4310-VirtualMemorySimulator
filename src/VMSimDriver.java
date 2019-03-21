@@ -1,5 +1,5 @@
-/*
- Author:        Joshua Chen
+/**
+ @author:        Joshua Chen
                 Annie Wu 
 				
  Assignment:    Program 2 
@@ -21,21 +21,29 @@ addresses (in hex and also provided with this project) that are used to simulate
 */
 
 import java.io.*;
+import java.util.Scanner;
 
 public class VMSimDriver {
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner scan = new Scanner(System.in);
-        
-        System.out.println("Enter location of your input file: ");
-        String file = scan.nextLine();
-        scan.close();
 
-        
-        //get file
-        
-        
-        CPU cpu = new CPU();
-        cpu.readFile(file);
+        // ie. test_files/test_1.txt
+        System.out.print("Test File Path: ");
+        String testFilePath = scan.next();
+
+        Scanner testFile = new Scanner(new File(testFilePath));
+
+        // Physical Memory:
+        // 2^12 - 2^8 = 2^4 = 16 Pages
+        // Each pages contains 12 bits addressable width
+        int[][] ram = new int[16][4096];
+
+
+        // Virtual Memory:
+        // 2^16 - 2^8 = 2^8 = 256 Page Table Entries
+        PageTable pageTable = new PageTable(256);
+
+        // TLB:
+        TLB tlb = new TLB(16);
     }
 }

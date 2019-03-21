@@ -8,7 +8,7 @@
  Date:          24 March 2019 
  
  
-- The TLB will be a one-dimensional array if TlbEntries. 
+- The TLB will be a one-dimensional array if TlbEntry.
 - A TlbEntry consists of a virtual page number and a frame number. 
 - The TLB is small and must be scanned on every lookup. 
 - The arrays used to implement the page table and TLB will be arrays of data structures that represent the tables’ entries.
@@ -18,15 +18,17 @@ Table entry for the TLB:
 */
 
 public class TLB {
-    private TlbEntries entries[];
+    private TlbEntry tlbEntries[];
+    private int currEntry;
     private final static int DEFAULT_MAX_ENTRIES = 16;
 
     public TLB() {
         this(DEFAULT_MAX_ENTRIES);
     }
 
-    public TLB(int max_entries) {
-        this.entries = new TlbEntries[DEFAULT_MAX_ENTRIES];
+    public TLB(int maxEntries) {
+        this.tlbEntries = new TlbEntry[DEFAULT_MAX_ENTRIES];
+        this.currEntry = 0;
     }
     
     /*
@@ -40,7 +42,7 @@ public class TLB {
     Check if page number is in the TLB. 
 	*/
     public int checkPageNumber(int pageNumber) {
-
+        return 0;
     }
 
     /*
@@ -55,5 +57,15 @@ public class TLB {
     */
     public void updateDirtyBit(int pageNumber) {
 
+    }
+
+    public void addEntry (String vpn, int pageFrameNum) {
+        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum);
+
+        if (currEntry == tlbEntries.length - 1) {
+            currEntry = 0;
+        } else {
+            currEntry += 1;
+        }
     }
 }
