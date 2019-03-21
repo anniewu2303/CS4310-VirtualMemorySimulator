@@ -23,7 +23,7 @@ public class VirtualPageTable {
     /*
     Initialize array of page table entries
     */
-    public void start() {
+    public PageTable() {
         table = new PageTableEntry[   ]; 
         for (int x=0; x<   ; x++) {
             table[x] = new PageTableEntry(0, 0, 0, -1); //V, R, D, frame#
@@ -42,7 +42,6 @@ public class VirtualPageTable {
 		if (table[pageNumber].getValid() == 1) {
 			frameNumber = table[pageNumber].getFrame();
         }
-    
         return frameNumber;
     }
 
