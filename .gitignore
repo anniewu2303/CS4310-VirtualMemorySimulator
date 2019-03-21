@@ -91,3 +91,5 @@ fabric.properties
 
 # Ignore Creation of new Files
 page_files_working_set
+
+log.txt
