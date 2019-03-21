@@ -34,5 +34,8 @@ public class VMSimDriver {
         
         //get file
         
+        
+        CPU cpu = new CPU();
+        cpu.readFile(file);
     }
 }
