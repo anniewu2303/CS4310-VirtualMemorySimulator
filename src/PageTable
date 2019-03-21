@@ -26,7 +26,7 @@ public class VirtualPageTable {
     public PageTable() {
         table = new PageTableEntry[   ]; 
         for (int x=0; x<   ; x++) {
-            table[x] = new PageTableEntry(0, 0, 0, -1); //V, R, D, frame#
+            table[x] = new PageTableEntry(false, false, false, -1); //V, R, D, frame#
         }
     }
 
@@ -50,15 +50,15 @@ public class VirtualPageTable {
     */
     public void update(int pageNumber, int frameNumber) {
         table[pageNumber].setFrame(frameNumber);    
-        table[pageNumber].setValid(1);              //valid
-        table[pageNumber].setR(1);                  //just referneced
-        table[pageNumber].setDirty(0);              //not written to
+        table[pageNumber].setValid(true);          //valid
+        table[pageNumber].setR(true);              //just referneced
+        table[pageNumber].setDirty(false);         //not written to
     }
 
     /*
     Get dirty bit from table at this page number
     */
-    public int getDirtyBit(int pageNumber) {
+    public boolean getDirtyBit(int pageNumber) {
         return table[pageNumber].getDirtyBit();
     }
     
@@ -72,7 +72,7 @@ public class VirtualPageTable {
     /*
     Get reference bit from the table at this page number
     */
-    public int getStartingRef(int pageNumber) {
+    public boolean getStartingRef(int pageNumber) {
         return table[pageNumber].getRefBit();
     }
 
