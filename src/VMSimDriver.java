@@ -72,7 +72,8 @@ public class VMSimDriver {
                         }
                         page.nextLine();
                     }
-                    log.printf("Read --  %s.pg Index (%s/%d): %d\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue);
+                    log.printf("Read --  %s.pg Index (%s/%d): %d\n",
+                            address.substring(0, 2), address.substring(2, 4), pageIndex, currValue);
                     break;
                 // Write
                 case 1:
@@ -103,7 +104,8 @@ public class VMSimDriver {
                     writeToFile.write(inputStr.getBytes());
                     writeToFile.close();
 
-                    log.printf("Write --  %s.pg Index (%s/%d): (%d --> %d)\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue, newValue);
+                    log.printf("Write --  %s.pg Index (%s/%d): (%d --> %d)\n",
+                            address.substring(0, 2), address.substring(2, 4), pageIndex, currValue, newValue);
                     break;
                 default:
                     System.out.println("Problem With File Format");
