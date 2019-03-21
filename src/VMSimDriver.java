@@ -1,16 +1,16 @@
 /**
  * @author: Joshua Chen
- *          Annie Wu
- *
+ * Annie Wu
+ * <p>
  * Assignment:    Program 2
  * Class:         CS 4310 - Operating Systems
  * Instructor:    Dominick Atanasio
  * Date:          24 March 2019
- *
- *
+ * <p>
+ * <p>
  * Your program will accept as a command line argument the test file path to a text file populated with virtual memory
  * addresses (in hex and also provided with this project) that are used to simulate memory accesses called by a process.
- *
+ * <p>
  * - For each test file that you run, you should use an original copy of the page files that are available with the project.
  * - You do not want altered page files of a previous runs to be used.
  * - Keep the originals in a safe place and overwrite the working set for each simulation.
@@ -25,6 +25,8 @@ import java.util.Scanner;
 public class VMSimDriver {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         Scanner scan = new Scanner(System.in);
+
+        createWorkingSet("page_files");
 
         // Physical Memory:
         // 2^12 - 2^8 = 2^4 = 16 Pages
@@ -85,5 +87,38 @@ public class VMSimDriver {
             }
         }
 
+    }
+
+    /**
+     * Create Working Set Directory with all path files copied
+     * @param path
+     * @throws IOException
+     */
+    private static void createWorkingSet(String path) throws IOException {
+        File pathDirectory = new File(path);
+
+        String workSetDirectoryName = path.concat("_working_set");
+
+        // Create Directory if it does not exist
+        File directory = new File(workSetDirectoryName);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Get all files from the path directory
+        File[] files = pathDirectory.listFiles();
+        for (File f : files) {
+            String[] fileName = f.getName().split("\\.");
+
+            File copyFile = new File(workSetDirectoryName + "/" + fileName[0] + ".txt");
+            PrintWriter output = new PrintWriter(copyFile);
+
+            // Copy Contents of Original Files to new Files
+            Scanner file = new Scanner(new File(path + "/" + f.getName()));
+            while (file.hasNextLine()) {
+                output.println(file.nextLine());
+            }
+            output.close();
+        }
     }
 }
