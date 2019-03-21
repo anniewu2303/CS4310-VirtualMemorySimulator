@@ -13,25 +13,25 @@ Table entry for TLB:
 */
 
 
-public class TlbEntries {
+public class TlbEntry {
     private String vpn;         // Virtual Page Number
-    private int frame_num;
     private boolean validBit, refBit, dirtyBit;
+    private int pageFrameNum;
 
-    public TlbEntries(String vpn, int frame_num) {
+    public TlbEntry(String vpn, int pageFrameNum) {
         this.vpn = vpn;
-        this.frame_num = frame_num;
         this.validBit = true;   // If in TLB, then it exists in the page table
         this.refBit = true;     // If in TLB, then it just got referenced
         this.dirtyBit = false;  // Not necessarily had it's value changed.
+        this.pageFrameNum = pageFrameNum;
     }
 
     public String getVpn() {
         return vpn;
     }
 
-    public int getFrame_num() {
-        return frame_num;
+    public int getPageFrameNum() {
+        return pageFrameNum;
     }
 
     public boolean isValidBit() {

@@ -8,7 +8,9 @@
  Date:          24 March 2019 
 
 
-- The page table will be an array of PageTableEntries (so the page table will be a one-dimensional array). 
+
+- The page table will be an array of PageTableEntry (so the page table will be a one-dimensional array).
+
 - You will use the virtual page number (V-Page#) as the index to the elements of this array.
 
 Table entry for the virtual page table:
