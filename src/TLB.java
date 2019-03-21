@@ -26,7 +26,7 @@ public class TLB {
     }
 
     public TLB(int max_entries) {
-        this.entries = new TlbEntries[max_entries];
+        this.entries = new TlbEntries[DEFAULT_MAX_ENTRIES];
     }
     
     /*
