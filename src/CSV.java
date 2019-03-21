@@ -23,19 +23,19 @@
 */
 
 public class CSV {
-    
+
     private String address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage;
     
     /*
         + "" turns the parameter into a string for writing to output file
     */
-    
-    
+
+
     public void address(String a) {
         address = a;
         output();
     }
-    
+
     /*
     0 = read
     1 = write
@@ -44,12 +44,12 @@ public class CSV {
         rw = r + "";
         output();
     }
-    
+
     public void value(int v) {
         value = v + "";
         output();
     }
-    
+
     /*
     0 = false
     1 = true
@@ -58,7 +58,7 @@ public class CSV {
         soft = s + "";
         output();
     }
-    
+
     /*
     0 = false
     1 = true
@@ -67,7 +67,7 @@ public class CSV {
         hard = h + "";
         output();
     }
-    
+
     /*
     0 = false
     1 = true
@@ -76,12 +76,12 @@ public class CSV {
         hit = h + "";
         output();
     }
-    
+
     public void evictedPageNumber(int e) {
         evictedPageNumber = e + "";
         output();
     }
-    
+
     /*
     0 = not set
     1 = set
@@ -94,18 +94,18 @@ public class CSV {
     public void header() {
         System.out.println("Address, r/w, value, soft, hard, hit, evicted_pg#, dirty_evicted_page");
     }
-    
+
     /*
     Output to CSV file if we have all of the info 
     */
     public void output() {
 
     }
-    
+
     /*
     Format output file test_#.csv
     */
     public void createOutputFile(String fileName) {
-        
+
     }
 }

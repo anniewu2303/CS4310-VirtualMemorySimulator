@@ -24,14 +24,14 @@ public class OS {
     Reset r-bit of all entries in page table
     */
     public void resetRef() {
-        
+
     }
-    
+
     /*
     Reset d-bit in page table when a page has been written back to disk 
     */
     public void resetDirty() {
-        
+
     }
-	
+
 }

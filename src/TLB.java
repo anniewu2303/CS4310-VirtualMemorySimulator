@@ -30,14 +30,14 @@ public class TLB {
         this.tlbEntries = new TlbEntry[DEFAULT_MAX_ENTRIES];
         this.currEntry = 0;
     }
-    
+
     /*
     Initialize TLB
     */
     public void start() {
 
     }
-    
+
     /*
     Check if page number is in the TLB. 
 	*/
@@ -59,7 +59,7 @@ public class TLB {
 
     }
 
-    public void addEntry (String vpn, int pageFrameNum) {
+    public void addEntry(String vpn, int pageFrameNum) {
         tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum);
 
         if (currEntry == tlbEntries.length - 1) {

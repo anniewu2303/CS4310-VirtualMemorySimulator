@@ -36,7 +36,7 @@ public class MMU {
     public int readValue(String thisAddress) {
         return 0;
     }
-    
+
     /*
     Write this value to physical memory
     */

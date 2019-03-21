@@ -30,11 +30,11 @@ public class TlbEntry {
         return vpn;
     }
 
-    public int getPageFrameNum() {
-        return pageFrameNum;
+    public void setVpn(String vpn) {
+        this.vpn = vpn;
     }
 
-    public boolean isValidBit() {
+    public boolean isValid() {
         return validBit;
     }
 
@@ -42,7 +42,7 @@ public class TlbEntry {
         this.validBit = validBit;
     }
 
-    public boolean isRefBit() {
+    public boolean isRef() {
         return refBit;
     }
 
@@ -50,11 +50,19 @@ public class TlbEntry {
         this.refBit = refBit;
     }
 
-    public boolean isDirtyBit() {
+    public boolean isDirty() {
         return dirtyBit;
     }
 
     public void setDirtyBit(boolean dirtyBit) {
         this.dirtyBit = dirtyBit;
+    }
+
+    public int getPageFrameNum() {
+        return pageFrameNum;
+    }
+
+    public void setPageFrameNum(int pageFrameNum) {
+        this.pageFrameNum = pageFrameNum;
     }
 }

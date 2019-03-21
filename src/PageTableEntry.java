@@ -13,46 +13,46 @@ Table entry for the virtual page table:
 */
 
 public class PageTableEntry {
-    private int frame;
-    private boolean valid, ref, dirty;
+    private boolean validBit, refBit, dirtyBit;
+    private int pageFrameNum;
 
     public PageTableEntry(boolean valid, boolean ref, boolean dirty, int frame) {
-        this.valid = valid;
-        this.ref = ref;
-        this.dirty = dirty;
-        this.frame = frame;
-    }
-    
-    public boolean getValidBit() {
-        return valid;
-    }
-    
-    publicvoid setValidBit(boolean v) {
-        valid = v;
-    }
-    
-    public boolean getRefBit() {
-        return ref;
-    }
-    
-    public void setRefBit(boolean r) {
-        ref = r;
-    }
-    
-    public boolean getDirtyBit() {
-        return dirty;
+        this.validBit = true;   // If in TLB, then it exists in the page table
+        this.refBit = true;     // If in TLB, then it just got referenced
+        this.dirtyBit = false;  // Not necessarily had it's value changed.
+        this.pageFrameNum = pageFrameNum;
     }
 
-    public void setDirtyBit (boolean d) {
-        dirty = d;
+
+    public boolean isValid() {
+        return validBit;
     }
 
-    public int getFrame_Num() {
-        return frame;
+    public void setValidBit(boolean validBit) {
+        this.validBit = validBit;
     }
 
-    public void setFrame_Num(int f) {
-        frame = f;
+    public boolean isRef() {
+        return refBit;
     }
-       
+
+    public void setRefBit(boolean refBit) {
+        this.refBit = refBit;
+    }
+
+    public boolean isDirty() {
+        return dirtyBit;
+    }
+
+    public void setDirtyBit(boolean dirtyBit) {
+        this.dirtyBit = dirtyBit;
+    }
+
+    public int getPageFrameNum() {
+        return pageFrameNum;
+    }
+
+    public void setPageFrameNum(int pageFrameNum) {
+        this.pageFrameNum = pageFrameNum;
+    }
 }

@@ -9,40 +9,42 @@
 
 
 
-- The page table will be an array of PageTableEntry (so the page table will be a one-dimensional array).
+- The page pageTableEntries will be an array of PageTableEntry (so the page pageTableEntries will be a one-dimensional array).
 
 - You will use the virtual page number (V-Page#) as the index to the elements of this array.
 
-Table entry for the virtual page table:
+Table entry for the virtual page pageTableEntries:
 	| V | R | D | PageFrame# |
 */
 
-public class VirtualPageTable {
+public class PageTable {
 
-    private PageTableEntry[] table;
-    private int index = 0; //index in page table 
-    
-    /*
-    Initialize array of page table entries
-    */
+    private PageTableEntry[] pageTableEntries;
+    private int index = 0; //index in page pageTableEntries
+    private static int DEFAULT_MAX_ENTRIES = 256;
+
     public PageTable() {
-        table = new PageTableEntry[   ]; 
-        for (int x=0; x<   ; x++) {
-            table[x] = new PageTableEntry(false, false, false, -1); //V, R, D, frame#
-        }
+        this(DEFAULT_MAX_ENTRIES);
     }
 
-	/*
-	Check if page number is in the table. 
-		If it is, get the frame number.
-		Else, the frame number does not exist (-1)
-	*/
-	public int checkPageNumber(int pageNumber) {
-		int frameNumber = -1;
-        
-		//if the page number is valid in the page table, get the frame number 
-		if (table[pageNumber].getValid() == 1) {
-			frameNumber = table[pageNumber].getFrame();
+    /*
+    Initialize array of page pageTableEntries entries
+    */
+    public PageTable(int maxEntries) {
+        pageTableEntries = new PageTableEntry[maxEntries];
+    }
+
+    /*
+    Check if page number is in the pageTableEntries.
+        If it is, get the frame number.
+        Else, the frame number does not exist (-1)
+    */
+    public int checkPageNumber(int pageNumber) {
+        int frameNumber = -1;
+
+        //if the page number is valid in the page pageTableEntries, get the frame number
+        if (pageTableEntries[pageNumber].isValid()) {
+            frameNumber = pageTableEntries[pageNumber].getPageFrameNum();
         }
         return frameNumber;
     }
@@ -51,49 +53,49 @@ public class VirtualPageTable {
     Update an entry at this page number with this frame number
     */
     public void update(int pageNumber, int frameNumber) {
-        table[pageNumber].setFrame(frameNumber);    
-        table[pageNumber].setValid(true);          //valid
-        table[pageNumber].setR(true);              //just referneced
-        table[pageNumber].setDirty(false);         //not written to
+        pageTableEntries[pageNumber].setPageFrameNum(frameNumber);
+        pageTableEntries[pageNumber].setValidBit(true);          //valid
+        pageTableEntries[pageNumber].setRefBit(true);              //just referneced
+        pageTableEntries[pageNumber].setDirtyBit(false);         //not written to
     }
 
     /*
-    Get dirty bit from table at this page number
+    Get dirty bit from pageTableEntries at this page number
     */
     public boolean getDirtyBit(int pageNumber) {
-        return table[pageNumber].getDirtyBit();
+        return pageTableEntries[pageNumber].isDirty();
     }
-    
+
     /*
     Set dirty bit to 1 at this page number
     */
     public void setDirtyBit(int pageNumber) {
-        table[pageNumber].setDirtyBit(1);
+        pageTableEntries[pageNumber].setDirtyBit(true);
     }
-    
+
     /*
-    Get reference bit from the table at this page number
+    Get reference bit from the pageTableEntries at this page number
     */
     public boolean getStartingRef(int pageNumber) {
-        return table[pageNumber].getRefBit();
+        return pageTableEntries[pageNumber].isRef();
     }
 
     /*
     Set reference bit to 1 at this page number
     */
     public void setRefBit(int pageNumber) {
-        table[pageNumber].setRefBit(1);
+        pageTableEntries[pageNumber].setRefBit(true);
     }
-    
+
     /*
     Reset reference bit to 0 at this page number
     */
     public void resetRefBit(int pageNumber) {
-        table[pageNumber].setRefBit(0);
+        pageTableEntries[pageNumber].setRefBit(false);
     }
-	
+
     /*
-    Get index in page table
+    Get index in page pageTableEntries
     */
     public int getTableIndex() {
         return index;
