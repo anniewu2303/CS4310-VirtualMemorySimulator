@@ -37,8 +37,8 @@ public class CSV {
     }
 
     /**
-     * 0 = false
-     * 1 = true
+     * 0 = read
+     * 1 = write
      */
     public void rw(int r) {
         rw = r + "";
