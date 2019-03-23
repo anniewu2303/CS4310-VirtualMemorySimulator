@@ -13,7 +13,8 @@
  * - In each byte of ram you will store an integer value
  * (yes, an int is typically larger than a byte but this will make the project simpler)
  * <p>
- * - Physical memory address width is 12 bits
+ * - Physical memory address width is 12 bits 
+ * - 8 bits for offset 
  */
 
 public class PhysicalMemory {
@@ -21,5 +22,13 @@ public class PhysicalMemory {
 
     public PhysicalMemory(int numPageFrames, int pageSize) {
         this.ram = new int[numPageFrames][pageSize];
+    }
+    
+    public int getPhysicalMemory(int frameNumber, int offset) {
+        return ram[frameNumber][offset];
+    }
+    
+    public void setPhysicalMemory(int frameNumber, int offset, int value) {
+        ram[frameNumber][offset] = value;
     }
 }
