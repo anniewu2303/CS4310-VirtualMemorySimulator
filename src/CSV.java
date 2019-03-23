@@ -36,10 +36,10 @@ public class CSV {
         output();
     }
 
-    /*
-    0 = read
-    1 = write
-    */
+    /**
+     * 0 = false
+     * 1 = true
+     */
     public void rw(int r) {
         rw = r + "";
         output();
@@ -50,28 +50,28 @@ public class CSV {
         output();
     }
 
-    /*
-    0 = false
-    1 = true
-    */
+    /**
+     * 0 = false
+     * 1 = true
+     */
     public void soft(int s) {
         soft = s + "";
         output();
     }
 
-    /*
-    0 = false
-    1 = true
-    */
+    /**
+     * 0 = false
+     * 1 = true
+     */
     public void hard(int h) {
         hard = h + "";
         output();
     }
 
-    /*
-    0 = false
-    1 = true
-    */
+    /**
+     * 0 = false
+     * 1 = true
+     */
     public void hit(int h) {
         hit = h + "";
         output();
@@ -82,10 +82,10 @@ public class CSV {
         output();
     }
 
-    /*
-    0 = not set
-    1 = set
-    */
+    /**
+     * 0 = false
+     * 1 = true
+     */
     public void dirtyEvictedPage(int d) {
         dirtyEvictedPage = d + "";
         output();
@@ -95,16 +95,27 @@ public class CSV {
         System.out.println("Address, r/w, value, soft, hard, hit, evicted_pg#, dirty_evicted_page");
     }
 
-    /*
-    Output to CSV file if we have all of the info 
-    */
+    /**
+     * Output to CSV file if we have all of the info and then reset all info 
+     */
     public void output() {
-
+        if ( address != null && rw != null && value != null && soft != null && hard != null && hit != null && evictedPageNumber != null && dirtyEvictedPage != null) 
+        {
+            System.out.printf("%7s, %3s, %5s, %4s, %4s, %3s, %11s, %18s", address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage);
+            address = null;
+            rw = null;
+            value = null;
+            soft = null;
+            hard = null;
+            hit = null;
+            evictedPageNumber = null;
+            dirtyEvictedPage = null;
+        }
     }
 
-    /*
-    Format output file test_#.csv
-    */
+    /**
+     * Format output file test_#.csv
+     */
     public void createOutputFile(String fileName) {
 
     }
