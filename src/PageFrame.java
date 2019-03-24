@@ -1,6 +1,8 @@
 /**
  * @author Joshua Chen
  * Date Created: Mar 24, 2019
+ *
+ * Represents Individual Page Frames for Physical Memory.
  */
 public class PageFrame {
     private PageFrame next;
