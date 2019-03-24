@@ -43,7 +43,7 @@ public class CPU {
             switch (rw) {
                 // Read
                 case 0:
-                    System.out.print(mmu.read(address));
+                    mmu.read(address);
                     //log.printf("Read --  %s.pg Index (%s/%d): %d\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue);
                     break;
                 // Write

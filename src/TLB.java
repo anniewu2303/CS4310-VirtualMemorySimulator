@@ -31,13 +31,29 @@ public class TLB {
         this.currEntry = 0;
     }
 
-    public void addEntry(String vpn, int pageFrameNum, boolean wasWrittenTo) {
-        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum, wasWrittenTo);
+    public void addEntry(String vpn, int pageFrameNum) {
+        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum);
 
         if (currEntry == tlbEntries.length - 1) {
             currEntry = 0;
         } else {
             currEntry += 1;
         }
+    }
+
+    /**
+     * Check TLB for page frame number
+     * @param vpn
+     * @return frameNumber if it exists
+     */
+    public int getPageFrameNum(String vpn) {
+        int pageFrameNum = -1;
+
+        for (int i = 0; i < tlbEntries.length; i++) {
+            if (tlbEntries[i] != null && vpn.equals(tlbEntries[i].getVpn())) {
+                pageFrameNum = tlbEntries[i].getPageFrameNum();
+            }
+        }
+        return pageFrameNum;
     }
 }

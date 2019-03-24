@@ -33,17 +33,23 @@ entry of the page being called for after the CPU traps to the OS. You can use th
 public class MMU {
     private String pageFilesPath;
     private PhysicalMemory physMem;
-    private PageTable virtMem;
+    private PageTable pageTable;    // Virtual Memory
     private TLB tlb;
 
     public MMU(String pageFilesPath) {
         physMem = new PhysicalMemory();
-        virtMem = new PageTable();
+        pageTable = new PageTable();
         this.pageFilesPath = pageFilesPath;
         this.tlb = new TLB();
     }
 
-    public String read(String address) throws IOException {
+    public void process(String address) {
+        String vpn = address.substring(0, 2);
+        int pageFrameNum = getFrameNumber(vpn);
+
+    }
+
+    public void read(String address) throws IOException {
         String result = null;
         String pageFrame = address.substring(0, 2);
         int pageIndex = Integer.parseInt(address.substring(2), 16);
@@ -59,7 +65,7 @@ public class MMU {
             }
             page.nextLine();
         }
-        return result;
+        System.out.println(result);
     }
 
     public void write(String address, int newValue) throws IOException {
@@ -89,5 +95,33 @@ public class MMU {
         FileOutputStream writeToFile = new FileOutputStream(pageFileName);
         writeToFile.write(inputStr.getBytes());
         writeToFile.close();
+    }
+
+    private int getFrameNumber(String vpn) {
+        // Check TLB
+        int pageFrameNum = tlb.getPageFrameNum(vpn);
+
+        // Hit
+        if (pageFrameNum != -1) {
+            System.out.println("Hit");
+            return pageFrameNum;
+        }
+
+        // Check Page Table
+        pageFrameNum = pageTable.getPageFrameNum(vpn);
+
+        // Soft Miss
+        if (pageFrameNum != -1) {
+            System.out.println("Soft Miss");
+            tlb.addEntry(vpn, pageFrameNum);
+            return pageFrameNum;
+        }
+        // Hard Miss
+        else {
+            System.out.println("Hard Miss");
+            pageTable.update(vpn, pageFrameNum);
+            tlb.addEntry(vpn, pageFrameNum);
+            return pageTable.getPageFrameNum(vpn);
+        }
     }
 }

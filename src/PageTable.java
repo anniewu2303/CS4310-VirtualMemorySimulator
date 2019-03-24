@@ -39,12 +39,13 @@ public class PageTable {
         If it is, get the frame number.
         Else, the frame number does not exist (-1)
     */
-    public int checkPageNumber(int pageNumber) {
+    public int getPageFrameNum(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
         int frameNumber = -1;
 
         //if the page number is valid in the page pageTableEntries, get the frame number
-        if (pageTableEntries[pageNumber].isValid()) {
-            frameNumber = pageTableEntries[pageNumber].getPageFrameNum();
+        if (pageTableEntries[pageNum] != null && pageTableEntries[pageNum].isValid()) {
+            frameNumber = pageTableEntries[pageNum].getPageFrameNum();
         }
         return frameNumber;
     }
@@ -52,11 +53,12 @@ public class PageTable {
     /*
     Update an entry at this page number with this frame number
     */
-    public void update(int pageNumber, int frameNumber) {
-        pageTableEntries[pageNumber].setPageFrameNum(frameNumber);
-        pageTableEntries[pageNumber].setValidBit(true);          //valid
-        pageTableEntries[pageNumber].setRefBit(true);              //just referneced
-        pageTableEntries[pageNumber].setDirtyBit(false);         //not written to
+    public void update(String vpn, int frameNumber) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        pageTableEntries[pageNum].setPageFrameNum(frameNumber);
+        pageTableEntries[pageNum].setValidBit(true);          //valid
+        pageTableEntries[pageNum].setRefBit(true);              //just referneced
+        pageTableEntries[pageNum].setDirtyBit(false);         //not written to
     }
 
     /*
