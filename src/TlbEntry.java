@@ -1,14 +1,14 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Represents Single Entries in the TLB.
  * Each TLB Entry Contains:
- *          Virtual Page Number (vpn) | Valid Bit | Reference Bit | Dirty Bit | Page Frame Number (pfn)
+ * Virtual Page Number (vpn) | Valid Bit | Reference Bit | Dirty Bit | Page Frame Number (pfn)
  */
 
 public class TlbEntry {
@@ -23,7 +23,7 @@ public class TlbEntry {
         this.dirtyBit = isDirty;
         this.pageFrameNum = pageFrameNum;
     }
-    
+
     public String getVpn() {
         return vpn;
     }

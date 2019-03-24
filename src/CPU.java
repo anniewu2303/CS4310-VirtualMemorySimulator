@@ -1,26 +1,27 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Central Processing Unit
- *
+ * <p>
  * The CPU processes the testFilePath and hands the processes to the MMU to read or write.
  * - If the address is preceded by a zero, then the MMU is told to read from the address.
  * - If the address is preceded by a one, then the MMU is told to replace the value at the address with a newValue.
- *
+ * <p>
  * Hardware Clock Interrupt:
  * After CPU Processes 10 Instructions:
- *      Tell OS to unset r-bits of all page table entries (virtual memory).
- *
+ * Tell OS to unset r-bits of all page table entries (virtual memory).
+ * <p>
  * When page has been *written back to the disk*:
- *      CPU should reset d-bits of all page table entries (virtual memory).
+ * CPU should reset d-bits of all page table entries (virtual memory).
  */
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CPU {
@@ -33,17 +34,18 @@ public class CPU {
     /**
      * Processes File.
      * Determines if the Process is a Read of Write.
+     *
      * @param testFilePath
      * @throws IOException
      */
     public void processFile(String testFilePath) throws IOException {
-        Scanner testFile  = new Scanner(new File(testFilePath));
+        Scanner testFile = new Scanner(new File(testFilePath));
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
 
         while (testFile.hasNextLine()) {
             int rw = Integer.parseInt(testFile.nextLine());
             String address = testFile.nextLine();
-          
+
             switch (rw) {
                 // Read
                 case 0:

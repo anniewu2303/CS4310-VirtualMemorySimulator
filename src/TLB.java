@@ -1,11 +1,11 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Translation Lookaside Buffer
  * One-Dimensional Array of TlbEntry.
  * TLB (Default) Contains 16 Entries.
@@ -28,6 +28,7 @@ public class TLB {
 
     /**
      * FIFO Replacement
+     *
      * @param vpn
      * @param pageFrameNum
      */
