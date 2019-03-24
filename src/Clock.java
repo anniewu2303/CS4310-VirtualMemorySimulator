@@ -16,7 +16,7 @@ as a circular linked list. This should be done in the OS (kernel).
 
 */
 
-public class Clock {
+public class Clock<T> {
 
 
 }
