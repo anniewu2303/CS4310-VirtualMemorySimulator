@@ -2,33 +2,34 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Author:        Joshua Chen
- *                Annie Wu 
- * 
- * Assignment:    Program 2 
- * Class:         CS 4310 - Operating Systems 
- * Instructor:    Dominick Atanasio 
- * Date:          24 March 2019 
- * 
- * 
- * - Your CPU will read the test file VM addresses and hand them to the MMU for fetching or writing. 
- *      - If the address is preceded by a zero, then the MMU should only read value. 
- *      - If the address is preceded by a one, then the address will be followed by an integer value 
- *      that needs to be written to physical memory. 
- * 
- * - The MMU should set the r-bit on a read or write of data in the TLB. 
- * - The MMU should set the dirty bit on a write.
- * 
- * - Before the MMU evicts a record in the TLB, the CPU traps to the OS on a Hard Miss, or the CPU
- * interrupts for a clock interrupt, the MMU should update the page table with the current records(s) in the TLB.
- * 
- * - If the MMU is evicting a record in the TLB it will only need to update that one record in the page table, 
- * otherwise, it should update all records in the page table with those in the TLB. 
- * 
- * - When the MMU encounters a soft or hard miss, if the TLB is full it will need to overwrite a record in the TLB with the
- * entry of the page being called for after the CPU traps to the OS. 
- * - You can use the FIFO replacement algorithm for this.
- * 
+ * @author:     Joshua Chen, Annie Wu
+ * @date        Mar 24, 2019
+ *
+ * Assignment:  Project 2 - Virtual Memory Simulator
+ * Class:       CS 4310 - Operating Systems
+ * Instructor:  Dominick Atanasio
+ *
+ * MMU is told (by the CPU) whether to Read From or Write To an Address.
+ *
+ * If Reading:
+ *      - MMU sets the r-bit.
+ *
+ * If Writing:
+ *      - MMU sets the r-bit.
+ *      - MMU sets the d-bit.
+ *
+ * MMU Updates the Page Table with the Current Record(s) in the TLB when:
+ *      - Before the MMU evicts a record in the TLB.
+ *      - The CPU traps the OS on a hard miss.
+ *      - The CPU interrupts for a clock interrupt.
+ *
+ * If MMU is Evicting a Record in TLB:
+ *      - Only update that one record in the page table.
+ * Otherwise:
+ *      - Update all records in the page table with those in the TLB.
+ *
+ * When Encountering a Miss:
+ *      If TLB is full, then overwrite a record in TLB
  */
 
 public class MMU {
@@ -44,6 +45,12 @@ public class MMU {
         this.os = new OS();
     }
 
+    /**
+     * Accepts an address.
+     * Reads the value at the address.
+     * @param address
+     * @throws IOException
+     */
     public void read(String address) throws IOException {
         String result = null;
         String vpn = address.substring(0, 2);
@@ -64,6 +71,13 @@ public class MMU {
         System.out.println(result);
     }
 
+    /**
+     * Accepts an Address and a New Value.
+     * Replaces the value at the address with the newValue.
+     * @param address
+     * @param newValue
+     * @throws IOException
+     */
     public void write(String address, int newValue) throws IOException {
         String vpn = address.substring(0, 2);
         int pageFrameNum = getFrameNumber(address, vpn, true);
