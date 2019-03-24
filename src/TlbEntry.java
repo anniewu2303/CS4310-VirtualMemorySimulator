@@ -59,19 +59,19 @@ public class TlbEntry {
         this.dirtyBit = dirtyBit;
     }
 
-    public int getPageFrameNumber() {
-        return pageFrameNum;
-    }
-
-    public void setPageFrameNumber(int pageFrameNum) {
-        this.pageFrameNum = pageFrameNum;
-    }
-    
     public int getPageNumber() {
         return pageNumber;
     }
-    
+
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
+    }
+
+    public int getPageFrameNum() {
+        return pageFrameNum;
+    }
+
+    public void setPageFrameNum(int pageFrameNum) {
+        this.pageFrameNum = pageFrameNum;
     }
 }

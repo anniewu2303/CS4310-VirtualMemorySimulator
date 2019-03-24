@@ -32,16 +32,6 @@ import java.util.Scanner;
  */
 
 public class MMU {
-
-
-    private CSV csv;
-    private TLB tlb;
-    private TlbEntry tlbEntries[];
-    private PhysicalMemory memory;
-    private PageTable table;
-    private OS os;
-
-public class MMU {
     private String pageFilesPath;
     private PageTable pageTable;    // Virtual Memory
     private TLB tlb;
