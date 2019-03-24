@@ -1,11 +1,11 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Page Table (Virtual Memory)
  */
 
@@ -26,6 +26,7 @@ public class PageTable {
     /**
      * Returns a PageTableEntry if it exists in the Page Table.
      * Returns null if it does not.
+     *
      * @param vpn
      * @return
      */
@@ -42,6 +43,7 @@ public class PageTable {
 
     /**
      * Page Table Adds or Updates Page Table Entry bits.
+     *
      * @param vpn
      * @param frameNumber
      * @param isDirty
@@ -56,6 +58,7 @@ public class PageTable {
 
     /**
      * Gets dirty bit from pageTableEntries at this vpn.
+     *
      * @param vpn
      * @return
      */
@@ -66,6 +69,7 @@ public class PageTable {
 
     /**
      * Set dirty bit to 1 at this vpn.
+     *
      * @param vpn
      */
     public void setDirtyBit(String vpn) {
@@ -75,6 +79,7 @@ public class PageTable {
 
     /**
      * Gets reference bit from the pageTableEntries at this vpn.
+     *
      * @param vpn
      * @return
      */
@@ -82,9 +87,10 @@ public class PageTable {
         int pageNum = Integer.parseInt(vpn, 16);
         return pageTableEntries[pageNum].isRef();
     }
-    
+
     /**
      * Sets reference bit to 1 at this vpn.
+     *
      * @param vpn
      */
     public void setRefBit(String vpn) {
@@ -94,6 +100,7 @@ public class PageTable {
 
     /**
      * Reset reference bit to 0 at this vpn.
+     *
      * @param vpn
      */
     public void resetRefBit(String vpn) {
@@ -103,6 +110,7 @@ public class PageTable {
 
     /**
      * Get currEntry in pageTableEntries
+     *
      * @return
      */
     public int getTableIndex() {

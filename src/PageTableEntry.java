@@ -1,15 +1,15 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Represents Single Page Table Entries in the Page Table.
- *
+ * <p>
  * Each TLB Entry Contains:
- *          Valid Bit | Reference Bit | Dirty Bit | Page Frame Number (pfn)
+ * Valid Bit | Reference Bit | Dirty Bit | Page Frame Number (pfn)
  */
 
 public class PageTableEntry {

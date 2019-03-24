@@ -1,13 +1,13 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Physical Memory (RAM)
- *
+ * <p>
  * (Default) Holds 16 Pages
  * (Default) Page Size of 12 bits.
  */
@@ -29,6 +29,7 @@ public class PhysicalMemory {
 
     /**
      * Attempts to Add Entry into Page Frames.
+     *
      * @param address
      * @return
      */
@@ -46,6 +47,7 @@ public class PhysicalMemory {
 
     /**
      * Returns the head pointer of the clock algorithm.
+     *
      * @return
      */
     public PageFrame getHead() {

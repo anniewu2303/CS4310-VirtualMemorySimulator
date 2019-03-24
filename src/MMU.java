@@ -2,34 +2,34 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * MMU is told (by the CPU) whether to Read From or Write To an Address.
- *
+ * <p>
  * If Reading:
- *      - MMU sets the r-bit.
- *
+ * - MMU sets the r-bit.
+ * <p>
  * If Writing:
- *      - MMU sets the r-bit.
- *      - MMU sets the d-bit.
- *
+ * - MMU sets the r-bit.
+ * - MMU sets the d-bit.
+ * <p>
  * MMU Updates the Page Table with the Current Record(s) in the TLB when:
- *      - Before the MMU evicts a record in the TLB.
- *      - The CPU traps the OS on a hard miss.
- *      - The CPU interrupts for a clock interrupt.
- *
+ * - Before the MMU evicts a record in the TLB.
+ * - The CPU traps the OS on a hard miss.
+ * - The CPU interrupts for a clock interrupt.
+ * <p>
  * If MMU is Evicting a Record in TLB:
- *      - Only update that one record in the page table.
+ * - Only update that one record in the page table.
  * Otherwise:
- *      - Update all records in the page table with those in the TLB.
- *
+ * - Update all records in the page table with those in the TLB.
+ * <p>
  * When Encountering a Miss:
- *      If TLB is full, then overwrite a record in TLB
+ * If TLB is full, then overwrite a record in TLB
  */
 
 public class MMU {
@@ -48,6 +48,7 @@ public class MMU {
     /**
      * Accepts an address.
      * Reads the value at the address.
+     *
      * @param address
      * @throws IOException
      */
@@ -74,6 +75,7 @@ public class MMU {
     /**
      * Accepts an Address and a New Value.
      * Replaces the value at the address with the newValue.
+     *
      * @param address
      * @param newValue
      * @throws IOException
@@ -111,6 +113,7 @@ public class MMU {
     /**
      * Sets R bit on Read or Write
      * Sets D bit on Write
+     *
      * @param address
      * @param vpn
      * @param isDirty

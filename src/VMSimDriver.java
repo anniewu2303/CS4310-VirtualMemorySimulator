@@ -1,20 +1,21 @@
 /**
- * @author:     Joshua Chen, Annie Wu
- * @date        Mar 24, 2019
- *
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
+ * <p>
  * Assignment:  Project 2 - Virtual Memory Simulator
  * Class:       CS 4310 - Operating Systems
  * Instructor:  Dominick Atanasio
- *
+ * <p>
  * Accepts a command line argument for a test file path to a text file populated with virtual memory address.
  * Ex. test_files/test_1.txt
- *
+ * <p>
  * Page Files Acting as the Physical Memory Addresses Will Have a Working Set Copy Created.
  * This way no altered page files of a previous run is used.
- *
  */
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class VMSimDriver {
@@ -33,6 +34,7 @@ public class VMSimDriver {
 
     /**
      * Create Working Set Directory with all path files copied.
+     *
      * @param path
      * @throws IOException
      */
