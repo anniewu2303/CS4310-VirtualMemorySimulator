@@ -32,11 +32,15 @@ entry of the page being called for after the CPU traps to the OS. You can use th
 
 public class MMU {
     private String pageFilesPath;
+    private PhysicalMemory physMem;
+    private PageTable virtMem;
     private TLB tlb;
 
-    public MMU(String pageFilesPath, int numTLBEntries) {
+    public MMU(String pageFilesPath) {
+        physMem = new PhysicalMemory();
+        virtMem = new PageTable();
         this.pageFilesPath = pageFilesPath;
-        this.tlb = new TLB(numTLBEntries);
+        this.tlb = new TLB();
     }
 
     public String read(String address) throws IOException {
@@ -86,5 +90,4 @@ public class MMU {
         writeToFile.write(inputStr.getBytes());
         writeToFile.close();
     }
-
 }

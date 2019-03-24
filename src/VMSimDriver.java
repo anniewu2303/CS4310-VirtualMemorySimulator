@@ -24,16 +24,7 @@ import java.util.Scanner;
 
 public class VMSimDriver {
     public static void main(String[] args) throws IOException {
-        // Physical Memory:
-        // 2^12 - 2^8 = 2^4 = 16 Pages
-        // Each pages contains 12 bits addressable width
-        PhysicalMemory ram = new PhysicalMemory(16, 4096);
-
-        // Virtual Memory:
-        // 2^16 - 2^8 = 2^8 = 256 Page Table Entries
-        PageTable pageTable = new PageTable(256);
-
-        CPU cpu = new CPU("page_files", 16);
+        CPU cpu = new CPU("page_files");
 
         // ie. test_files/test_1.txt
         Scanner scan = new Scanner(System.in);

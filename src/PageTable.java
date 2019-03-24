@@ -11,7 +11,7 @@
 
 - The page pageTableEntries will be an array of PageTableEntry (so the page pageTableEntries will be a one-dimensional array).
 
-- You will use the virtual page number (V-Page#) as the index to the elements of this array.
+- You will use the virtual page number (V-Page#) as the currEntry to the elements of this array.
 
 Table entry for the virtual page pageTableEntries:
 	| V | R | D | PageFrame# |
@@ -20,7 +20,7 @@ Table entry for the virtual page pageTableEntries:
 public class PageTable {
 
     private PageTableEntry[] pageTableEntries;
-    private int index = 0; //index in page pageTableEntries
+    private int currEntry = 0; //currEntry in page pageTableEntries
     private static int DEFAULT_MAX_ENTRIES = 256;
 
     public PageTable() {
@@ -95,9 +95,9 @@ public class PageTable {
     }
 
     /*
-    Get index in page pageTableEntries
+    Get currEntry in page pageTableEntries
     */
     public int getTableIndex() {
-        return index;
+        return currEntry;
     }
 }

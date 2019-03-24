@@ -27,40 +27,12 @@ public class TLB {
     }
 
     public TLB(int maxEntries) {
-        this.tlbEntries = new TlbEntry[DEFAULT_MAX_ENTRIES];
+        this.tlbEntries = new TlbEntry[maxEntries];
         this.currEntry = 0;
     }
 
-    /*
-    Initialize TLB
-    */
-    public void start() {
-
-    }
-
-    /*
-    Check if page number is in the TLB. 
-	*/
-    public int checkPageNumber(int pageNumber) {
-        return 0;
-    }
-
-    /*
-    Update this page number in TLB with this frame number
-    */
-    public void update(int pageNumber, int frameNumber) {
-
-    }
-
-    /*
-    Update dirty bit
-    */
-    public void updateDirtyBit(int pageNumber) {
-
-    }
-
-    public void addEntry(String vpn, int pageFrameNum) {
-        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum);
+    public void addEntry(String vpn, int pageFrameNum, boolean wasWrittenTo) {
+        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum, wasWrittenTo);
 
         if (currEntry == tlbEntries.length - 1) {
             currEntry = 0;

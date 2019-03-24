@@ -18,6 +18,12 @@
 
 public class PhysicalMemory {
     private int[][] ram;
+    private static int DEFAULT_NUM_PAGE_FRAMES = 16;
+    private static int DEFAULT_PAGE_SIZE = 4096;    // 12 bits
+
+    public PhysicalMemory() {
+        this(DEFAULT_NUM_PAGE_FRAMES, DEFAULT_PAGE_SIZE);
+    }
 
     public PhysicalMemory(int numPageFrames, int pageSize) {
         this.ram = new int[numPageFrames][pageSize];

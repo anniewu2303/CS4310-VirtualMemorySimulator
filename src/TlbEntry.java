@@ -18,11 +18,11 @@ public class TlbEntry {
     private boolean validBit, refBit, dirtyBit;
     private int pageFrameNum;
 
-    public TlbEntry(String vpn, int pageFrameNum) {
+    public TlbEntry(String vpn, int pageFrameNum, boolean wasWrittenTo) {
         this.vpn = vpn;
         this.validBit = true;   // If in TLB, then it exists in the page table
         this.refBit = true;     // If in TLB, then it just got referenced
-        this.dirtyBit = false;  // Not necessarily had it's value changed.
+        this.dirtyBit = wasWrittenTo;  // Not necessarily had it's value changed.
         this.pageFrameNum = pageFrameNum;
     }
 

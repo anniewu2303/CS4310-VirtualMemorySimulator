@@ -1,4 +1,4 @@
-/*
+/**
  Author:        Joshua Chen
                 Annie Wu
 
@@ -25,8 +25,8 @@ public class CPU {
     private String pageFilesPath;
     private MMU mmu;
 
-    public CPU(String pageFilesPath, int numTLBEntries) {
-        this.mmu = new MMU(pageFilesPath, numTLBEntries);
+    public CPU(String pageFilesPath) {
+        this.mmu = new MMU(pageFilesPath);
         this.pageFilesPath = pageFilesPath;
     }
 
