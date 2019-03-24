@@ -1,18 +1,4 @@
 /**
- * Author:        Joshua Chen
- *                Annie Wu 
- * 
- * Assignment:    Program 2 
- * Class:         CS 4310 - Operating Systems 
- * Instructor:    Dominick Atanasio 
- * Date:          24 March 2019 
- * 
- * 
- * Table entry for TLB:
- *      | V-Page# | V | R | D | PageFrame# |
- */
-
-/**
  * @author:     Joshua Chen, Annie Wu
  * @date        Mar 24, 2019
  *
