@@ -1,25 +1,20 @@
 /**
- Author:        Joshua Chen
-                Annie Wu
-
- Assignment:    Program 2
- Class:         CS 4310 - Operating Systems
- Instructor:    Dominick Atanasio
- Date:          24 March 2019
-
-
-- Your program will accept as a command line argument the test file path to a text file populated with virtual memory
-addresses (in hex and also provided with this project) that are used to simulate memory accesses called by a process.
-
-- Your CPU will read them, hand them to the MMU for fetching or writing.
-    - If the address is preceded by a zero, then the MMU should only read value.
-    - If the address is preceded by a one, then the address will be followed by an integer value that needs to be
-    written to physical memory.
-
-*/
+ * @author:     Joshua Chen, Annie Wu
+ * @date        Mar 24, 2019
+ *
+ * Assignment:  Project 2 - Virtual Memory Simulator
+ * Class:       CS 4310 - Operating Systems
+ * Instructor:  Dominick Atanasio
+ *
+ * Central Processing Unit
+ *
+ * The CPU processes the testFilePath and hands the processes to the MMU to read or write.
+ * - If the address is preceded by a zero, then the MMU is told to read from the address.
+ * - If the address is preceded by a one, then the MMU is told to replace the value at the address with a newValue.
+ */
 
 import java.io.*;
-import java.util.*;
+import java.util.Scanner;
 
 public class CPU {
     private MMU mmu;
@@ -28,6 +23,12 @@ public class CPU {
         this.mmu = new MMU(pageFilesPath);
     }
 
+    /**
+     * Processes File.
+     * Determines if the Process is a Read of Write.
+     * @param testFilePath
+     * @throws IOException
+     */
     public void processFile(String testFilePath) throws IOException {
         Scanner testFile  = new Scanner(new File(testFilePath));
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
