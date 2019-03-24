@@ -22,18 +22,14 @@ import java.io.*;
 import java.util.*;
 
 public class CPU {
-    private String pageFilesPath;
     private MMU mmu;
 
     public CPU(String pageFilesPath) {
         this.mmu = new MMU(pageFilesPath);
-        this.pageFilesPath = pageFilesPath;
     }
 
     public void readFile(String testFilePath) throws IOException {
         Scanner testFile  = new Scanner(new File(testFilePath));
-        createWorkingSet(this.pageFilesPath);
-
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
 
         while (testFile.hasNextLine()) {
@@ -55,38 +51,6 @@ public class CPU {
                 default:
                     System.out.println("Problem With File Format");
             }
-        }
-    }
-
-    /**
-     * Create Working Set Directory with all path files copied
-     *
-     * @param path
-     * @throws IOException
-     */
-    private void createWorkingSet(String path) throws IOException {
-        File pathDirectory = new File(path);
-
-        String workSetDirectoryName = path.concat("_working_set");
-
-        // Create Directory if it does not exist
-        File directory = new File(workSetDirectoryName);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-
-        // Get all files from the path directory
-        File[] files = pathDirectory.listFiles();
-        for (File f : files) {
-            File copyFile = new File(workSetDirectoryName + "/" + f.getName());
-            PrintWriter output = new PrintWriter(copyFile);
-
-            // Copy Contents of Original Files to new Files
-            Scanner file = new Scanner(new File(path + "/" + f.getName()));
-            while (file.hasNextLine()) {
-                output.println(file.nextLine());
-            }
-            output.close();
         }
     }
 }

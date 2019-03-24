@@ -32,12 +32,12 @@ entry of the page being called for after the CPU traps to the OS. You can use th
 
 public class MMU {
     private String pageFilesPath;
-    private PhysicalMemory physMem;
+    private PhysicalMemory ram;
     private PageTable pageTable;    // Virtual Memory
     private TLB tlb;
 
     public MMU(String pageFilesPath) {
-        physMem = new PhysicalMemory();
+        ram = new PhysicalMemory();
         pageTable = new PageTable();
         this.pageFilesPath = pageFilesPath;
         this.tlb = new TLB();
@@ -46,7 +46,7 @@ public class MMU {
     public void read(String address) throws IOException {
         String result = null;
         String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(vpn, false);
+        int pageFrameNum = getFrameNumber(address, vpn, false);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
 
         // Page to Read From
@@ -65,7 +65,7 @@ public class MMU {
 
     public void write(String address, int newValue) throws IOException {
         String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(vpn, true);
+        int pageFrameNum = getFrameNumber(address, vpn, true);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
 
         // Page to Write To
@@ -93,7 +93,7 @@ public class MMU {
         writeToFile.close();
     }
 
-    private int getFrameNumber(String vpn, boolean isDirty) {
+    private int getFrameNumber(String address, String vpn, boolean isDirty) {
         // Check TLB
         TlbEntry tlbEntry = tlb.getTLBEntry(vpn);
 
@@ -120,9 +120,10 @@ public class MMU {
         // Hard Miss
         else {
             System.out.println("Hard Miss");
+            int pageFrameNum = ram.addEntry(address);
             pageTable.update(vpn, pageFrameNum, isDirty);
             tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
-            return pageTable.getPageTableEntry(vpn).getPageFrameNum();
+            return pageFrameNum;
         }
     }
 }
