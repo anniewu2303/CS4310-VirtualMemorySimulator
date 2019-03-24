@@ -26,6 +26,7 @@ import java.util.Scanner;
 
 public class CPU {
     private MMU mmu;
+    private CSV csv;
 
     public CPU(String pageFilesPath) {
         this.mmu = new MMU(pageFilesPath);
@@ -39,12 +40,20 @@ public class CPU {
      * @throws IOException
      */
     public void processFile(String testFilePath) throws IOException {
-        Scanner testFile = new Scanner(new File(testFilePath));
+        File file = new File(testFilePath);
+        Scanner testFile = new Scanner(file);
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
+
+        //split file name and extension
+        String fileName = file.getName().split("\\.")[0];
+        csv.initializeCSV(fileName + ".csv");
 
         while (testFile.hasNextLine()) {
             int rw = Integer.parseInt(testFile.nextLine());
             String address = testFile.nextLine();
+
+            csv.rw(rw);
+            csv.address(address);
 
             switch (rw) {
                 // Read
