@@ -37,7 +37,7 @@ public class CSV {
     /**
      * initialize test_#.csv with header
      *
-     * @param path
+     * @param outputfile
      * @throws FileNotFoundException
      */
     public void initializeCSV(String outputfile) throws FileNotFoundException {
@@ -70,8 +70,13 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void soft(int s) {
-        soft = s + "";
+    public void soft(boolean bool) {
+        if (bool == false) {
+            soft = "0";
+        }
+        else {
+            soft = "1";
+        }
         output();
     }
 
@@ -79,8 +84,13 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hard(int h) {
-        hard = h + "";
+    public void hard(boolean bool) {
+        if (bool == false) {
+            soft = "0";
+        }
+        else {
+            soft = "1";
+        }
         output();
     }
 
@@ -88,13 +98,18 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hit(int h) {
-        hit = h + "";
+    public void hit(boolean bool) {
+        if (bool == false) {
+            soft = "0";
+        }
+        else {
+            soft = "1";
+        }
         output();
     }
 
     /**
-     * Output page if evicted or N/A if none
+     * Output page number that is evicted or N/A if none
      *
      * @param evicted
      */
@@ -103,10 +118,6 @@ public class CSV {
         output();
     }
 
-    /**
-     * 0 = false
-     * 1 = true
-     */
     public void dirtyEvictedPage(int d) {
         dirtyEvictedPage = d + "";
         output();
