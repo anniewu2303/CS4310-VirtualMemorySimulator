@@ -28,7 +28,7 @@ public class CPU {
         this.mmu = new MMU(pageFilesPath);
     }
 
-    public void readFile(String testFilePath) throws IOException {
+    public void processFile(String testFilePath) throws IOException {
         Scanner testFile  = new Scanner(new File(testFilePath));
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
 

@@ -33,7 +33,7 @@ public class VMSimDriver {
         Scanner scan = new Scanner(System.in);
         System.out.print("Test File Path: ");
         String testFilePath = scan.next();
-        cpu.readFile(testFilePath);
+        cpu.processFile(testFilePath);
     }
 
     /**

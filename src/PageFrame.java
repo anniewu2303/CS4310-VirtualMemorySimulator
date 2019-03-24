@@ -2,12 +2,12 @@
  * @author Joshua Chen
  * Date Created: Mar 24, 2019
  */
-public class PageFrameNode {
-    private PageFrameNode next;
+public class PageFrame {
+    private PageFrame next;
     private boolean refBit;
     private int physAddr;
 
-    public PageFrameNode(int physAddr) {
+    public PageFrame(int physAddr) {
         this.refBit = true;
         this.physAddr = physAddr;
     }
@@ -28,11 +28,11 @@ public class PageFrameNode {
         this.physAddr = physAddr;
     }
 
-    public PageFrameNode getNext() {
+    public PageFrame getNext() {
         return next;
     }
 
-    public void setNext(PageFrameNode next) {
+    public void setNext(PageFrame next) {
         this.next = next;
     }
 }

@@ -14,7 +14,7 @@
 - The arrays used to implement the page table and TLB will be arrays of data structures that represent the tables’ entries.
 
 Table entry for the TLB:
-    | V-Page# | V | R | D | PageFrameNode# |
+    | V-Page# | V | R | D | PageFrame# |
 */
 
 public class TLB {

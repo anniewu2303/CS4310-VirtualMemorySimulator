@@ -9,7 +9,7 @@
 
 
 Table entry for TLB:
-	| V-Page# | V | R | D | PageFrameNode# |
+	| V-Page# | V | R | D | PageFrame# |
 */
 
 

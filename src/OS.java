@@ -25,27 +25,36 @@ public class OS {
         ram = new PhysicalMemory();
     }
 
+    // Clock Algorithm
     public int addEntry(String address) {
         int pfn = ram.addEntry(address);
 
         // Clock is Full
         if (pfn == -1) {
-            PageFrameNode evictedPage = null;
+            PageFrame pageToEvict = null;
 
-            while (evictedPage == null) {
-                PageFrameNode temp = ram.getHead();
+            while (pageToEvict == null) {
+                PageFrame temp = ram.getHead();
+
+                // If R bit is 1, set to 0 and move head
                 if (temp.isRef()) {
                     temp.setRefBit(false);
-                } else {
-                    evictedPage = temp;
+                }
+                // If R bit is 0, evict page
+                else {
+                    pageToEvict = temp;
                 }
                 ram.moveHead();
             }
 
-            /* EVICT PAGE HERE*/
+            evict(pageToEvict);
         }
 
         pfn = ram.addEntry(address);
         return pfn;
+    }
+
+    private void evict(PageFrame pageToEvict) {
+        /* EVICT PAGE HERE*/
     }
 }
