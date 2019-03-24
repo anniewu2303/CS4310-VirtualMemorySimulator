@@ -46,7 +46,7 @@ public class MMU {
     public void read(String address) throws IOException {
         String result = null;
         String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(vpn);
+        int pageFrameNum = getFrameNumber(vpn, false);
         int offset = Integer.parseInt(address.substring(2), 16);
 
         // Page to Read From
@@ -65,7 +65,7 @@ public class MMU {
 
     public void write(String address, int newValue) throws IOException {
         String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(vpn);
+        int pageFrameNum = getFrameNumber(vpn, true);
         int offset = Integer.parseInt(address.substring(2), 16);
 
         // Page to Write To
@@ -93,9 +93,9 @@ public class MMU {
         writeToFile.close();
     }
 
-    private int getFrameNumber(String vpn) {
+    private int getFrameNumber(String vpn, boolean isDirty) {
         // Check TLB
-        int pageFrameNum = tlb.getPageFrameNum(vpn);
+        int pageFrameNum = tlb.getPageFrameNum(vpn, isDirty);
 
         // Hit
         if (pageFrameNum != -1) {
@@ -104,20 +104,20 @@ public class MMU {
         }
 
         // Check Page Table
-        pageFrameNum = pageTable.getPageFrameNum(vpn);
+        pageFrameNum = pageTable.getPageFrameNum(vpn, isDirty);
 
         // Soft Miss
         if (pageFrameNum != -1) {
             System.out.println("Soft Miss");
-            tlb.addEntry(vpn, pageFrameNum);
+            tlb.addEntry(vpn, pageFrameNum, isDirty);
             return pageFrameNum;
         }
         // Hard Miss
         else {
             System.out.println("Hard Miss");
-            pageTable.update(vpn, pageFrameNum);
-            tlb.addEntry(vpn, pageFrameNum);
-            return pageTable.getPageFrameNum(vpn);
+            pageTable.update(vpn, pageFrameNum, isDirty);
+            tlb.addEntry(vpn, pageFrameNum, isDirty);
+            return pageTable.getPageFrameNum(vpn, isDirty);
         }
     }
 }

@@ -39,13 +39,14 @@ public class PageTable {
         If it is, get the frame number.
         Else, the frame number does not exist (-1)
     */
-    public int getPageFrameNum(String vpn) {
+    public int getPageFrameNum(String vpn, boolean isDirty) {
         int pageNum = Integer.parseInt(vpn, 16);
         int frameNumber = -1;
 
         //if the page number is valid in the page pageTableEntries, get the frame number
         if (pageTableEntries[pageNum] != null && pageTableEntries[pageNum].isValid()) {
             frameNumber = pageTableEntries[pageNum].getPageFrameNum();
+            pageTableEntries[pageNum].setDirtyBit(isDirty);
         }
         return frameNumber;
     }
@@ -53,12 +54,12 @@ public class PageTable {
     /*
     Update an entry at this page number with this frame number
     */
-    public void update(String vpn, int frameNumber) {
+    public void update(String vpn, int frameNumber, boolean isDirty) {
         int pageNum = Integer.parseInt(vpn, 16);
         pageTableEntries[pageNum].setPageFrameNum(frameNumber);
         pageTableEntries[pageNum].setValidBit(true);          //valid
-        pageTableEntries[pageNum].setRefBit(true);              //just referneced
-        pageTableEntries[pageNum].setDirtyBit(false);         //not written to
+        pageTableEntries[pageNum].setRefBit(true);            //just referenced
+        pageTableEntries[pageNum].setDirtyBit(isDirty);
     }
 
     /*

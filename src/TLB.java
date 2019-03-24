@@ -31,8 +31,13 @@ public class TLB {
         this.currEntry = 0;
     }
 
-    public void addEntry(String vpn, int pageFrameNum) {
-        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum);
+    /**
+     * FIFO Replacement
+     * @param vpn
+     * @param pageFrameNum
+     */
+    public void addEntry(String vpn, int pageFrameNum, boolean isDirty) {
+        tlbEntries[currEntry] = new TlbEntry(vpn, pageFrameNum, isDirty);
 
         if (currEntry == tlbEntries.length - 1) {
             currEntry = 0;
@@ -46,12 +51,13 @@ public class TLB {
      * @param vpn
      * @return frameNumber if it exists
      */
-    public int getPageFrameNum(String vpn) {
+    public int getPageFrameNum(String vpn, boolean isDirty) {
         int pageFrameNum = -1;
 
         for (int i = 0; i < tlbEntries.length; i++) {
             if (tlbEntries[i] != null && vpn.equals(tlbEntries[i].getVpn())) {
                 pageFrameNum = tlbEntries[i].getPageFrameNum();
+                tlbEntries[i].setDirtyBit(isDirty);
             }
         }
         return pageFrameNum;
