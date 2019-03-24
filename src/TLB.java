@@ -55,8 +55,8 @@ public class TLB {
      */
     public void update(int pageNumber, int frameNumber) {
         for (int i=0; i<16; i++) {
-            if (tlbEntries[i] == pageNumber) {
-                tlbEntries[i].setPageFrameNum(frameNumber);
+            if (tlbEntries[i].getPageNumber() == pageNumber) {
+                tlbEntries[i].setPageFrameNumber(frameNumber);
                 tlbEntries[i].setValidBit(true);   //valid 
                 tlbEntries[i].setRefBit(true);     //just referneced 
                 tlbEntries[i].setDirtyBit(false);  //not written to 
