@@ -35,7 +35,7 @@ public class CPU {
         while (testFile.hasNextLine()) {
             int rw = Integer.parseInt(testFile.nextLine());
             String address = testFile.nextLine();
-
+          
             switch (rw) {
                 // Read
                 case 0:
