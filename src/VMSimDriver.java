@@ -62,8 +62,9 @@ public class VMSimDriver {
                     pageFrame = address.substring(0, 2);
                     pageIndex = Integer.parseInt(address.substring(2), 16); // Convert hex String to Int
 
-                    pageFileName = pageFilesPath + "_working_set/" + pageFrame;
-                    page = new Scanner(new File(pageFileName + ".pg"));
+                    // Page to Read From
+                    pageFileName = pageFilesPath + "_working_set/" + pageFrame + ".pg";
+                    page = new Scanner(new File(pageFileName));
 
                     for (int i = 0; page.hasNextLine(); i++) {
                         if (i == pageIndex) {
@@ -81,9 +82,10 @@ public class VMSimDriver {
                     pageIndex = Integer.parseInt(address.substring(2), 16); // Convert hex String to Int
                     newValue = Integer.parseInt(testFile.nextLine());
 
-                    pageFileName = pageFilesPath + "_working_set/" + pageFrame;
+                    // Page to Write To
+                    pageFileName = pageFilesPath + "_working_set/" + pageFrame + ".pg";
 
-                    BufferedReader reader = new BufferedReader(new FileReader(pageFileName + ".pg"));
+                    BufferedReader reader = new BufferedReader(new FileReader(pageFileName));
                     StringBuffer strBuffer = new StringBuffer();
                     String line;
                     int lineNum = 0;
@@ -100,7 +102,7 @@ public class VMSimDriver {
                     String inputStr = strBuffer.toString();
                     reader.close();
 
-                    FileOutputStream writeToFile = new FileOutputStream(pageFileName + ".pg");
+                    FileOutputStream writeToFile = new FileOutputStream(pageFileName);
                     writeToFile.write(inputStr.getBytes());
                     writeToFile.close();
 
