@@ -23,7 +23,7 @@ import java.io.PrintStream;
 
 public class CSV {
 
-    private String address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage;
+    private String address, rw, value, soft, hard, hit, evictedPageNumber, dirty;
     private PrintStream csv;
     
     /*
@@ -82,10 +82,10 @@ public class CSV {
      */
     public void hard(boolean bool) {
         if (bool == false) {
-            soft = "0";
+            hard = "0";
         }
         else {
-            soft = "1";
+            hard = "1";
         }
         output();
     }
@@ -96,10 +96,10 @@ public class CSV {
      */
     public void hit(boolean bool) {
         if (bool == false) {
-            soft = "0";
+            hit = "0";
         }
         else {
-            soft = "1";
+            hit = "1";
         }
         output();
     }
@@ -114,8 +114,17 @@ public class CSV {
         output();
     }
 
-    public void dirtyEvictedPage(int d) {
-        dirtyEvictedPage = d + "";
+    /**
+     * 0 = false
+     * 1 = true
+     */
+    public void dirty(boolean bool) {
+        if (bool == false) {
+            dirty = "0";
+        }
+        else {
+            dirty = "1";
+        }
         output();
     }
 
@@ -128,10 +137,10 @@ public class CSV {
      */
     public void output() {
         if (address != null && rw != null && value != null && soft != null && hard != null &&
-                hit != null && evictedPageNumber != null && dirtyEvictedPage != null) {
+                hit != null && evictedPageNumber != null && dirty != null) {
 
             csv.println(address + ", " + rw + ", " + value + ", " + soft + ", " + hard + ", " +
-                        hit + ", " + evictedPageNumber + ", " + dirtyEvictedPage);
+                        hit + ", " + evictedPageNumber + ", " + dirty);
 
             address = null;
             rw = null;
@@ -140,7 +149,7 @@ public class CSV {
             hard = null;
             hit = null;
             evictedPageNumber = null;
-            dirtyEvictedPage = null;
+            dirty = null;
         }
     }
 }
