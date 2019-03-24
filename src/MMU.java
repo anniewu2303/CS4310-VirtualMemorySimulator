@@ -66,7 +66,7 @@ public class MMU {
     public void write(String address, int newValue) throws IOException {
         String vpn = address.substring(0, 2);
         int pageFrameNum = getFrameNumber(vpn);
-        int pageIndex = Integer.parseInt(address.substring(2), 16);
+        int offset = Integer.parseInt(address.substring(2), 16);
 
         // Page to Write To
         String pageFileName = pageFilesPath + "_working_set/" + vpn + ".pg";
@@ -78,7 +78,7 @@ public class MMU {
         int lineNum = 0;
         while ((line = reader.readLine()) != null) {
             // Replace Line with New Value
-            if (lineNum == pageIndex - 1) {
+            if (lineNum == offset - 1) {
                 strBuffer.append(newValue + "\n");
             } else {
                 strBuffer.append(line + "\n");
