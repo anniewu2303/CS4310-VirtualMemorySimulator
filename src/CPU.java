@@ -11,6 +11,13 @@
  * The CPU processes the testFilePath and hands the processes to the MMU to read or write.
  * - If the address is preceded by a zero, then the MMU is told to read from the address.
  * - If the address is preceded by a one, then the MMU is told to replace the value at the address with a newValue.
+ *
+ * Hardware Clock Interrupt:
+ * After CPU Processes 10 Instructions:
+ *      Tell OS to unset r-bits of all page table entries (virtual memory).
+ *
+ * When page has been *written back to the disk*:
+ *      CPU should reset d-bits of all page table entries (virtual memory).
  */
 
 import java.io.*;
