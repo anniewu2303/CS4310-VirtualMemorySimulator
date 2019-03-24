@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.Scanner;
+
 /**
  Author:        Joshua Chen
                 Annie Wu 
@@ -28,19 +31,60 @@ entry of the page being called for after the CPU traps to the OS. You can use th
 */
 
 public class MMU {
+    private String pageFilesPath;
+    private TLB tlb;
 
-    /*
-    Read value from physical memory
-    */
-    public int readValue(String thisAddress) {
-        return 0;
+    public MMU(String pageFilesPath, int numTLBEntries) {
+        this.pageFilesPath = pageFilesPath;
+        this.tlb = new TLB(numTLBEntries);
     }
 
-    /*
-    Write this value to physical memory
-    */
-    public void writeValue(String thisAddress, int thisValue) {
+    public String read(String address) throws IOException {
+        String result = null;
+        String pageFrame = address.substring(0, 2);
+        int pageIndex = Integer.parseInt(address.substring(2), 16);
 
+        // Page to Read From
+        String pageFileName = pageFilesPath + "_working_set/" + pageFrame + ".pg";
+        Scanner page = new Scanner(new File(pageFileName));
+
+        for (int i = 0; page.hasNextLine(); i++) {
+            if (i == pageIndex) {
+                result = page.nextLine();
+                break;
+            }
+            page.nextLine();
+        }
+        return result;
+    }
+
+    public void write(String address, int newValue) throws IOException {
+        String pageFrame = address.substring(0, 2);
+        int pageIndex = Integer.parseInt(address.substring(2), 16);
+
+        // Page to Write To
+        String pageFileName = pageFilesPath + "_working_set/" + pageFrame + ".pg";
+        BufferedReader reader = new BufferedReader(new FileReader(pageFileName));
+
+        // Copy Line or Write Value to File
+        StringBuffer strBuffer = new StringBuffer();
+        String line;
+        int lineNum = 0;
+        while ((line = reader.readLine()) != null) {
+            // Replace Line with New Value
+            if (lineNum == pageIndex - 1) {
+                strBuffer.append(newValue + "\n");
+            } else {
+                strBuffer.append(line + "\n");
+            }
+            lineNum += 1;
+        }
+        String inputStr = strBuffer.toString();
+        reader.close();
+
+        FileOutputStream writeToFile = new FileOutputStream(pageFileName);
+        writeToFile.write(inputStr.getBytes());
+        writeToFile.close();
     }
 
 }

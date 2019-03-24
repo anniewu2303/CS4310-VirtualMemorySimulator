@@ -33,7 +33,7 @@ public class VMSimDriver {
         // 2^16 - 2^8 = 2^8 = 256 Page Table Entries
         PageTable pageTable = new PageTable(256);
 
-        CPU cpu = new CPU("page_files");
+        CPU cpu = new CPU("page_files", 16);
 
         // ie. test_files/test_1.txt
         Scanner scan = new Scanner(System.in);
