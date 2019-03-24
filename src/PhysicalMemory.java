@@ -1,20 +1,15 @@
 /**
- * Author:        Joshua Chen
- *                Annie Wu
+ * @author:     Joshua Chen, Annie Wu
+ * @date        Mar 24, 2019
  *
- * Assignment:    Program 2
- * Class:         CS 4310 - Operating Systems
- * Instructor:    Dominick Atanasio
- * Date:          24 March 2019
+ * Assignment:  Project 2 - Virtual Memory Simulator
+ * Class:       CS 4310 - Operating Systems
+ * Instructor:  Dominick Atanasio
  *
- * - Physical memory will be a two-dimensional array to simulate the page-frame# and the page of byte-addressable, byte-sized data.
- * - For instance, if physical memory can hold 16 pages of data and each page is 1kB,
- * then you would have a 2d array like: ram[16][1024].
- * - In each byte of ram you will store an integer value
- * (yes, an int is typically larger than a byte but this will make the project simpler)
- * <p>
- * - Physical memory address width is 12 bits 
- * - 8 bits for offset 
+ * Physical Memory (RAM)
+ *
+ * (Default) Holds 16 Pages
+ * (Default) Page Size of 12 bits.
  */
 
 public class PhysicalMemory {
@@ -32,6 +27,11 @@ public class PhysicalMemory {
         this.head = 0;
     }
 
+    /**
+     * Attempts to Add Entry into Page Frames.
+     * @param address
+     * @return
+     */
     public int addEntry(String address) {
         int pfn = -1;
         int physAddr = Integer.parseInt(address, 16);
@@ -44,27 +44,22 @@ public class PhysicalMemory {
         return pfn;
     }
 
+    /**
+     * Returns the head pointer of the clock algorithm.
+     * @return
+     */
     public PageFrame getHead() {
         return ram[head][0];
     }
 
+    /**
+     * Move head pointer of the clock algorithm.
+     */
     public void moveHead() {
         if (this.head == ram.length - 1) {
             head = 0;
         } else {
             head += 1;
         }
-    }
-
-    public int getMaxNumPageFrames() {
-        return ram.length;
-    }
-    
-    public int getPhysicalMemory(int frameNumber, int offset) {
-        return ram[frameNumber][offset];
-    }
-    
-    public void setPhysicalMemory(int frameNumber, int offset, int value) {
-        ram[frameNumber][offset] = value;
     }
 }
