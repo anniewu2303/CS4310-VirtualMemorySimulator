@@ -22,23 +22,37 @@
 
 */
 
+import java.io.*;
+
 public class CSV {
 
     private String address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage;
+    private PrintStream csv;
     
     /*
         + "" turns the parameter into a string for writing to output file
     */
 
-
+    /**
+     * initialize test_#.csv with header 
+     * @param path
+     * @throws FileNotFoundException 
+     */
+    public void initializeCSV(String outputfile) throws FileNotFoundException {
+        FileOutputStream output = new FileOutputStream(outputfile);
+        csv = new PrintStream(output);
+        header();
+    }
+    
+    
     public void address(String a) {
         address = a;
         output();
     }
 
     /**
-     * 0 = false
-     * 1 = true
+     * 0 = read
+     * 1 = write
      */
     public void rw(int r) {
         rw = r + "";
@@ -77,8 +91,12 @@ public class CSV {
         output();
     }
 
-    public void evictedPageNumber(int e) {
-        evictedPageNumber = e + "";
+    /**
+     * Output page if evicted or N/A if none 
+     * @param evicted 
+     */
+    public void evictedPageNumber(String evicted) {
+        evictedPageNumber = evicted;
         output();
     }
 
@@ -92,16 +110,19 @@ public class CSV {
     }
 
     public void header() {
-        System.out.println("Address, r/w, value, soft, hard, hit, evicted_pg#, dirty_evicted_page");
+        csv.println("Address, r/w, value, soft, hard, hit, evicted_pg#, dirty_evicted_page");
     }
 
     /**
      * Output to CSV file if we have all of the info and then reset all info 
      */
     public void output() {
-        if ( address != null && rw != null && value != null && soft != null && hard != null && hit != null && evictedPageNumber != null && dirtyEvictedPage != null) 
+        if ( address != null && rw != null && value != null && soft != null && hard != null && 
+                hit != null && evictedPageNumber != null && dirtyEvictedPage != null) 
         {
-            System.out.printf("%7s, %3s, %5s, %4s, %4s, %3s, %11s, %18s", address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage);
+            csv.println(address +", "+ rw +", "+ value +", "+ soft +", "+ hard +", "+ 
+                        hit +", "+ evictedPageNumber +", "+ dirtyEvictedPage);
+
             address = null;
             rw = null;
             value = null;
@@ -111,12 +132,5 @@ public class CSV {
             evictedPageNumber = null;
             dirtyEvictedPage = null;
         }
-    }
-
-    /**
-     * Format output file test_#.csv
-     */
-    public void createOutputFile(String fileName) {
-
     }
 }
