@@ -47,7 +47,7 @@ public class MMU {
         String result = null;
         String vpn = address.substring(0, 2);
         int pageFrameNum = getFrameNumber(vpn, false);
-        int offset = Integer.parseInt(address.substring(2), 16);
+        int offset = Integer.parseInt(address.substring(2, 4), 16);
 
         // Page to Read From
         String pageFileName = pageFilesPath + "_working_set/" + vpn + ".pg";
@@ -66,7 +66,7 @@ public class MMU {
     public void write(String address, int newValue) throws IOException {
         String vpn = address.substring(0, 2);
         int pageFrameNum = getFrameNumber(vpn, true);
-        int offset = Integer.parseInt(address.substring(2), 16);
+        int offset = Integer.parseInt(address.substring(2, 4), 16);
 
         // Page to Write To
         String pageFileName = pageFilesPath + "_working_set/" + vpn + ".pg";
@@ -95,29 +95,34 @@ public class MMU {
 
     private int getFrameNumber(String vpn, boolean isDirty) {
         // Check TLB
-        int pageFrameNum = tlb.getPageFrameNum(vpn, isDirty);
+        TlbEntry tlbEntry = tlb.getTLBEntry(vpn);
 
         // Hit
-        if (pageFrameNum != -1) {
+        if (tlbEntry != null) {
             System.out.println("Hit");
-            return pageFrameNum;
+            tlbEntry.setRefBit(true);
+            tlbEntry.setDirtyBit(isDirty);
+            return tlbEntry.getPageFrameNum();
         }
 
         // Check Page Table
-        pageFrameNum = pageTable.getPageFrameNum(vpn, isDirty);
+        PageTableEntry ptEntry = pageTable.getPageTableEntry(vpn);
 
         // Soft Miss
-        if (pageFrameNum != -1) {
+        if (ptEntry != null) {
             System.out.println("Soft Miss");
-            tlb.addEntry(vpn, pageFrameNum, isDirty);
-            return pageFrameNum;
+            ptEntry.setRefBit(true);
+            ptEntry.setDirtyBit(isDirty);
+            tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
+            return ptEntry.getPageFrameNum();
         }
+
         // Hard Miss
         else {
             System.out.println("Hard Miss");
             pageTable.update(vpn, pageFrameNum, isDirty);
-            tlb.addEntry(vpn, pageFrameNum, isDirty);
-            return pageTable.getPageFrameNum(vpn, isDirty);
+            tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
+            return pageTable.getPageTableEntry(vpn).getPageFrameNum();
         }
     }
 }

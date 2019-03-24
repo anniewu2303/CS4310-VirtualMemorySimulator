@@ -39,16 +39,15 @@ public class PageTable {
         If it is, get the frame number.
         Else, the frame number does not exist (-1)
     */
-    public int getPageFrameNum(String vpn, boolean isDirty) {
+    public PageTableEntry getPageTableEntry(String vpn) {
         int pageNum = Integer.parseInt(vpn, 16);
-        int frameNumber = -1;
+        PageTableEntry entry = null;
 
         //if the page number is valid in the page pageTableEntries, get the frame number
         if (pageTableEntries[pageNum] != null && pageTableEntries[pageNum].isValid()) {
-            frameNumber = pageTableEntries[pageNum].getPageFrameNum();
-            pageTableEntries[pageNum].setDirtyBit(isDirty);
+            entry = pageTableEntries[pageNum];
         }
-        return frameNumber;
+        return entry;
     }
 
     /*

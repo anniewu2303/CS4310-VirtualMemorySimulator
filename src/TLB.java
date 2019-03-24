@@ -46,20 +46,16 @@ public class TLB {
         }
     }
 
-    /**
-     * Check TLB for page frame number
-     * @param vpn
-     * @return frameNumber if it exists
-     */
-    public int getPageFrameNum(String vpn, boolean isDirty) {
-        int pageFrameNum = -1;
+
+    public TlbEntry getTLBEntry(String vpn) {
+        TlbEntry entry = null;
 
         for (int i = 0; i < tlbEntries.length; i++) {
             if (tlbEntries[i] != null && vpn.equals(tlbEntries[i].getVpn())) {
-                pageFrameNum = tlbEntries[i].getPageFrameNum();
-                tlbEntries[i].setDirtyBit(isDirty);
+                entry = tlbEntries[i];
+                break;
             }
         }
-        return pageFrameNum;
+        return entry;
     }
 }
