@@ -17,7 +17,7 @@
  */
 
 public class PhysicalMemory {
-    private PageFrame[][] ram;
+    private PageFrameNode[][] ram;
     private static int DEFAULT_NUM_PAGE_FRAMES = 16;
     private static int DEFAULT_PAGE_SIZE = 256;    // 12 bits
     private int head;
@@ -27,17 +27,39 @@ public class PhysicalMemory {
     }
 
     public PhysicalMemory(int numPageFrames, int pageSize) {
-        this.ram = new PageFrame[numPageFrames][pageSize];
+        this.ram = new PageFrameNode[numPageFrames][pageSize];
         this.head = 0;
     }
 
     public int addEntry(String address) {
-        int pfn = this.head;
-
+        int pfn = -1;
         int physAddr = Integer.parseInt(address, 16);
-        ram[this.head][0] = new PageFrame(physAddr);
 
-        head += 1;
+        if (this.head < ram.length) {
+            pfn = this.head;
+            ram[this.head][0] = new PageFrameNode(physAddr);
+            head += 1;
+        }
         return pfn;
+    }
+
+    public PageFrameNode getHead() {
+        return ram[head][0];
+    }
+
+    public void setHead(int newHead) {
+        this.head = newHead;
+    }
+
+    public void moveHead() {
+        if (this.head == ram.length - 1) {
+            head = 0;
+        } else {
+            head += 1;
+        }
+    }
+
+    public int getMaxNumPageFrames() {
+        return ram.length;
     }
 }

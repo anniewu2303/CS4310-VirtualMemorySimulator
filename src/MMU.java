@@ -32,15 +32,15 @@ entry of the page being called for after the CPU traps to the OS. You can use th
 
 public class MMU {
     private String pageFilesPath;
-    private PhysicalMemory ram;
     private PageTable pageTable;    // Virtual Memory
     private TLB tlb;
+    private OS os;
 
     public MMU(String pageFilesPath) {
-        ram = new PhysicalMemory();
-        pageTable = new PageTable();
+        this.pageTable = new PageTable();
         this.pageFilesPath = pageFilesPath;
         this.tlb = new TLB();
+        this.os = new OS();
     }
 
     public void read(String address) throws IOException {
@@ -120,7 +120,7 @@ public class MMU {
         // Hard Miss
         else {
             System.out.println("Hard Miss");
-            int pageFrameNum = ram.addEntry(address);
+            int pageFrameNum = os.addEntry(address);
             pageTable.update(vpn, pageFrameNum, isDirty);
             tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
             return pageFrameNum;

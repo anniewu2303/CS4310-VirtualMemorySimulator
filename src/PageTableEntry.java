@@ -9,7 +9,7 @@
 
 
 Table entry for the virtual page table:
-	| V | R | D | PageFrame# |
+	| V | R | D | PageFrameNode# |
 */
 
 public class PageTableEntry {

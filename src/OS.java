@@ -19,11 +19,33 @@ a page has been written back to the disk.
 */
 
 public class OS {
-    private Clock<PageFrame> clock;
+    private PhysicalMemory ram;
 
-    public OS(PhysicalMemory ram) {
+    public OS() {
         ram = new PhysicalMemory();
     }
 
+    public int addEntry(String address) {
+        int pfn = ram.addEntry(address);
 
+        // Clock is Full
+        if (pfn == -1) {
+            PageFrameNode evictedPage = null;
+
+            while (evictedPage == null) {
+                PageFrameNode temp = ram.getHead();
+                if (temp.isRef()) {
+                    temp.setRefBit(false);
+                } else {
+                    evictedPage = temp;
+                }
+                ram.moveHead();
+            }
+
+            /* EVICT PAGE HERE*/
+        }
+
+        pfn = ram.addEntry(address);
+        return pfn;
+    }
 }

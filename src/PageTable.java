@@ -14,7 +14,7 @@
 - You will use the virtual page number (V-Page#) as the currEntry to the elements of this array.
 
 Table entry for the virtual page pageTableEntries:
-	| V | R | D | PageFrame# |
+	| V | R | D | PageFrameNode# |
 */
 
 public class PageTable {
