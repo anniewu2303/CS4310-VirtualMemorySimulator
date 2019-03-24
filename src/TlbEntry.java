@@ -22,7 +22,7 @@
  *
  * Represents Single Entries in the TLB.
  * Each TLB Entry Contains:
- *          Virtual Page Number (vpn) | Valid Bit |  Reference Bit | Dirty Bit | Page Frame Number (pfn)
+ *          Virtual Page Number (vpn) | Valid Bit | Reference Bit | Dirty Bit | Page Frame Number (pfn)
  */
 
 public class TlbEntry {
