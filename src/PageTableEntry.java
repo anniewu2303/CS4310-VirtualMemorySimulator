@@ -1,24 +1,25 @@
 /**
- * Author:        Joshua Chen
- *                Annie Wu 
- * 
- * Assignment:    Program 2 
- * Class:         CS 4310 - Operating Systems 
- * Instructor:    Dominick Atanasio 
- * Date:          24 March 2019 
- * 
- * Table entry for the virtual page table:
- *      | V | R | D | PageFrame# |
+ * @author:     Joshua Chen, Annie Wu
+ * @date        Mar 24, 2019
+ *
+ * Assignment:  Project 2 - Virtual Memory Simulator
+ * Class:       CS 4310 - Operating Systems
+ * Instructor:  Dominick Atanasio
+ *
+ * Represents Single Page Table Entries in the Page Table.
+ *
+ * Each TLB Entry Contains:
+ *          Valid Bit | Reference Bit | Dirty Bit | Page Frame Number (pfn)
  */
 
 public class PageTableEntry {
     private boolean validBit, refBit, dirtyBit;
     private int pageFrameNum;
 
-    public PageTableEntry(int pageFrameNum) {
+    public PageTableEntry(int pageFrameNum, boolean isDirty) {
         this.validBit = true;   // If in TLB, then it exists in the page table
         this.refBit = true;     // If in TLB, then it just got referenced
-        this.dirtyBit = false;  // Not necessarily had it's value changed.
+        this.dirtyBit = isDirty;  // Not necessarily had it's value changed.
         this.pageFrameNum = pageFrameNum;
     }
 

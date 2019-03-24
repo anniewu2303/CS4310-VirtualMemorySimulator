@@ -1,103 +1,111 @@
 /**
- Author:        Joshua Chen
-                Annie Wu 
-				
- Assignment:    Program 2 
- Class:         CS 4310 - Operating Systems 
- Instructor:    Dominick Atanasio 
- Date:          24 March 2019 
-
-
-
-- The page pageTableEntries will be an array of PageTableEntry (so the page pageTableEntries will be a one-dimensional array).
-
-- You will use the virtual page number (V-Page#) as the index to the elements of this array.
-
-Table entry for the virtual page pageTableEntries:
-	| V | R | D | PageFrame# |
-*/
+ * @author:     Joshua Chen, Annie Wu
+ * @date        Mar 24, 2019
+ *
+ * Assignment:  Project 2 - Virtual Memory Simulator
+ * Class:       CS 4310 - Operating Systems
+ * Instructor:  Dominick Atanasio
+ *
+ * Page Table (Virtual Memory)
+ */
 
 public class PageTable {
 
     private PageTableEntry[] pageTableEntries;
-    private int index = 0; //index in page pageTableEntries
+    private int currEntry = 0; //currEntry in page pageTableEntries
     private static int DEFAULT_MAX_ENTRIES = 256;
 
     public PageTable() {
         this(DEFAULT_MAX_ENTRIES);
     }
 
-    /*
-    Initialize array of page pageTableEntries entries
-    */
     public PageTable(int maxEntries) {
         pageTableEntries = new PageTableEntry[maxEntries];
     }
 
-    /*
-    Check if page number is in the pageTableEntries.
-        If it is, get the frame number.
-        Else, the frame number does not exist (-1)
-    */
-    public int checkPageNumber(int pageNumber) {
-        int frameNumber = -1;
+    /**
+     * Returns a PageTableEntry if it exists in the Page Table.
+     * Returns null if it does not.
+     * @param vpn
+     * @return
+     */
+    public PageTableEntry getPageTableEntry(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        PageTableEntry entry = null;
 
         //if the page number is valid in the page pageTableEntries, get the frame number
-        if (pageTableEntries[pageNumber].isValid()) {
-            frameNumber = pageTableEntries[pageNumber].getPageFrameNum();
+        if (pageTableEntries[pageNum] != null && pageTableEntries[pageNum].isValid()) {
+            entry = pageTableEntries[pageNum];
         }
-        return frameNumber;
+        return entry;
     }
 
-    /*
-    Update an entry at this page number with this frame number
-    */
-    public void update(int pageNumber, int frameNumber) {
-        pageTableEntries[pageNumber].setPageFrameNum(frameNumber);
-        pageTableEntries[pageNumber].setValidBit(true);          //valid
-        pageTableEntries[pageNumber].setRefBit(true);              //just referneced
-        pageTableEntries[pageNumber].setDirtyBit(false);         //not written to
+    /**
+     * Page Table Adds or Updates Page Table Entry bits.
+     * @param vpn
+     * @param frameNumber
+     * @param isDirty
+     */
+    public void update(String vpn, int frameNumber, boolean isDirty) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        pageTableEntries[pageNum].setPageFrameNum(frameNumber);
+        pageTableEntries[pageNum].setValidBit(true);          //valid
+        pageTableEntries[pageNum].setRefBit(true);            //just referenced
+        pageTableEntries[pageNum].setDirtyBit(isDirty);
     }
 
-    /*
-    Get dirty bit from pageTableEntries at this page number
-    */
-    public boolean getDirtyBit(int pageNumber) {
-        return pageTableEntries[pageNumber].isDirty();
+    /**
+     * Gets dirty bit from pageTableEntries at this vpn.
+     * @param vpn
+     * @return
+     */
+    public boolean getDirtyBit(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        return pageTableEntries[pageNum].isDirty();
     }
 
-    /*
-    Set dirty bit to 1 at this page number
-    */
-    public void setDirtyBit(int pageNumber) {
-        pageTableEntries[pageNumber].setDirtyBit(true);
+    /**
+     * Set dirty bit to 1 at this vpn.
+     * @param vpn
+     */
+    public void setDirtyBit(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        pageTableEntries[pageNum].setDirtyBit(true);
     }
 
-    /*
-    Get reference bit from the pageTableEntries at this page number
-    */
-    public boolean getStartingRef(int pageNumber) {
-        return pageTableEntries[pageNumber].isRef();
+    /**
+     * Gets reference bit from the pageTableEntries at this vpn.
+     * @param vpn
+     * @return
+     */
+    public boolean getStartingRef(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        return pageTableEntries[pageNum].isRef();
+    }
+    
+    /**
+     * Sets reference bit to 1 at this vpn.
+     * @param vpn
+     */
+    public void setRefBit(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        pageTableEntries[pageNum].setRefBit(true);
     }
 
-    /*
-    Set reference bit to 1 at this page number
-    */
-    public void setRefBit(int pageNumber) {
-        pageTableEntries[pageNumber].setRefBit(true);
+    /**
+     * Reset reference bit to 0 at this vpn.
+     * @param vpn
+     */
+    public void resetRefBit(String vpn) {
+        int pageNum = Integer.parseInt(vpn, 16);
+        pageTableEntries[pageNum].setRefBit(false);
     }
 
-    /*
-    Reset reference bit to 0 at this page number
-    */
-    public void resetRefBit(int pageNumber) {
-        pageTableEntries[pageNumber].setRefBit(false);
-    }
-
-    /*
-    Get index in page pageTableEntries
-    */
+    /**
+     * Get currEntry in pageTableEntries
+     * @return
+     */
     public int getTableIndex() {
-        return index;
+        return currEntry;
     }
 }
