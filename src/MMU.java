@@ -93,6 +93,14 @@ public class MMU {
         writeToFile.close();
     }
 
+    /**
+     * Sets R bit on Read or Write
+     * Sets D bit on Write
+     * @param address
+     * @param vpn
+     * @param isDirty
+     * @return
+     */
     private int getFrameNumber(String address, String vpn, boolean isDirty) {
         // Check TLB
         TlbEntry tlbEntry = tlb.getTLBEntry(vpn);
