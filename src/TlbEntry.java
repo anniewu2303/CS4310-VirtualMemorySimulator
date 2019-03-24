@@ -1,22 +1,22 @@
 /**
- Author:        Joshua Chen
-                Annie Wu 
-				
- Assignment:    Program 2 
- Class:         CS 4310 - Operating Systems 
- Instructor:    Dominick Atanasio 
- Date:          24 March 2019 
-
-
-Table entry for TLB:
-	| V-Page# | V | R | D | PageFrame# |
-*/
+ * Author:        Joshua Chen
+ *                Annie Wu 
+ * 
+ * Assignment:    Program 2 
+ * Class:         CS 4310 - Operating Systems 
+ * Instructor:    Dominick Atanasio 
+ * Date:          24 March 2019 
+ * 
+ * 
+ * Table entry for TLB:
+ *      | V-Page# | V | R | D | PageFrame# |
+ */
 
 
 public class TlbEntry {
     private String vpn;         // Virtual Page Number
     private boolean validBit, refBit, dirtyBit;
-    private int pageFrameNum;
+    private int pageNumber, pageFrameNum;
 
     public TlbEntry(String vpn, int pageFrameNum) {
         this.vpn = vpn;
@@ -26,6 +26,7 @@ public class TlbEntry {
         this.pageFrameNum = pageFrameNum;
     }
 
+    
     public String getVpn() {
         return vpn;
     }
@@ -58,11 +59,19 @@ public class TlbEntry {
         this.dirtyBit = dirtyBit;
     }
 
-    public int getPageFrameNum() {
+    public int getPageFrameNumber() {
         return pageFrameNum;
     }
 
-    public void setPageFrameNum(int pageFrameNum) {
+    public void setPageFrameNumber(int pageFrameNum) {
         this.pageFrameNum = pageFrameNum;
+    }
+    
+    public int getPageNumber() {
+        return pageNumber;
+    }
+    
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
     }
 }
