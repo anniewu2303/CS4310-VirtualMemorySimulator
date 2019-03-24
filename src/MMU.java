@@ -43,23 +43,18 @@ public class MMU {
         this.tlb = new TLB();
     }
 
-    public void process(String address) {
-        String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(vpn);
-
-    }
-
     public void read(String address) throws IOException {
         String result = null;
-        String pageFrame = address.substring(0, 2);
-        int pageIndex = Integer.parseInt(address.substring(2), 16);
+        String vpn = address.substring(0, 2);
+        int pageFrameNum = getFrameNumber(vpn);
+        int offset = Integer.parseInt(address.substring(2), 16);
 
         // Page to Read From
-        String pageFileName = pageFilesPath + "_working_set/" + pageFrame + ".pg";
+        String pageFileName = pageFilesPath + "_working_set/" + vpn + ".pg";
         Scanner page = new Scanner(new File(pageFileName));
 
         for (int i = 0; page.hasNextLine(); i++) {
-            if (i == pageIndex) {
+            if (i == offset) {
                 result = page.nextLine();
                 break;
             }
@@ -69,11 +64,12 @@ public class MMU {
     }
 
     public void write(String address, int newValue) throws IOException {
-        String pageFrame = address.substring(0, 2);
+        String vpn = address.substring(0, 2);
+        int pageFrameNum = getFrameNumber(vpn);
         int pageIndex = Integer.parseInt(address.substring(2), 16);
 
         // Page to Write To
-        String pageFileName = pageFilesPath + "_working_set/" + pageFrame + ".pg";
+        String pageFileName = pageFilesPath + "_working_set/" + vpn + ".pg";
         BufferedReader reader = new BufferedReader(new FileReader(pageFileName));
 
         // Copy Line or Write Value to File
