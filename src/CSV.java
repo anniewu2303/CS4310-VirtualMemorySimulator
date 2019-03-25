@@ -21,9 +21,9 @@ import java.io.*;
 
 public class CSV {
 
-    private String address, rw, value, soft, hard, hit, evictedPageNumber, dirty;
+    private String address, rw, value, soft, hard, hit, evictedPageNum, dirty;
     private PrintWriter csv;
-    
+
     /*
         + "" turns the parameter into a string for writing to output file
     */
@@ -64,12 +64,10 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void soft(boolean isSoft) {
-        if (!isSoft) {
-            soft = "0";
-        } else {
-            soft = "1";
-        }
+    public void soft() {
+        soft = "1";
+        hard = "0";
+        hit = "0";
         output();
     }
 
@@ -77,12 +75,10 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hard(boolean isHard) {
-        if (!isHard) {
-            hard = "0";
-        } else {
-            hard = "1";
-        }
+    public void hard() {
+        soft = "0";
+        hard = "1";
+        hit = "0";
         output();
     }
 
@@ -90,12 +86,10 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hit(boolean isHit) {
-        if (!isHit) {
-            hit = "0";
-        } else {
-            hit = "1";
-        }
+    public void hit() {
+        soft = "0";
+        hard = "0";
+        hit = "1";
         output();
     }
 
@@ -105,7 +99,7 @@ public class CSV {
      * @param evicted
      */
     public void evictedPageNumber(String evicted) {
-        evictedPageNumber = evicted;
+        evictedPageNum = evicted;
         output();
     }
 
@@ -131,10 +125,10 @@ public class CSV {
      */
     public void output() {
         if (address != null && rw != null && value != null && soft != null && hard != null &&
-                hit != null && evictedPageNumber != null && dirty != null) {
+                hit != null && evictedPageNum != null && dirty != null) {
 
-            csv.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", address, rw, value, soft, hard, hit, evictedPageNumber, dirty);
-            System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", address, rw, value, soft, hard, hit, evictedPageNumber, dirty);
+            csv.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", address, rw, value, soft, hard, hit, evictedPageNum, dirty);
+            System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", address, rw, value, soft, hard, hit, evictedPageNum, dirty);
 
             address = null;
             rw = null;
@@ -142,7 +136,7 @@ public class CSV {
             soft = null;
             hard = null;
             hit = null;
-            evictedPageNumber = null;
+            evictedPageNum = null;
             dirty = null;
         }
     }
