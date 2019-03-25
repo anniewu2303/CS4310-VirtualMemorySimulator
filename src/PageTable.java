@@ -10,7 +10,6 @@
  */
 
 public class PageTable {
-
     private PageTableEntry[] pageTableEntries;
     private int currEntry; //currEntry in page pageTableEntries
     private static int DEFAULT_MAX_ENTRIES = 256;
