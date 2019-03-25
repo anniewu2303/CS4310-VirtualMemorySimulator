@@ -58,9 +58,7 @@ public class OS {
     //OS resets all ref bits in page table every 10 instructions
 
     public void resetAllRef() {
-        for (int x=0; x<256; x++) {
-            table.resetRefBit(x);
-        }
+        table.resetAllRefBit();
     }
 
     public void setPageTable (PageTable pt) {

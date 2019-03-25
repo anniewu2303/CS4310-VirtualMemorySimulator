@@ -130,4 +130,12 @@ public class PageTable {
     public int getTableIndex() {
         return currEntry;
     }
+
+    public void resetAllRefBit() {
+        for (int i = 0; i < pageTableEntries.length; i++) {
+            if (pageTableEntries[i] != null) {
+                pageTableEntries[i].setRefBit(false);
+            }
+        }
+    }
 }
