@@ -22,7 +22,6 @@ public class OS {
     private PhysicalMemory ram;
     private PageTable table;
     private CSV csv;
-    private int clockIndex = 0;
 
     public OS(String pageFilesPath) {
         this.pageFilesPath = pageFilesPath;
@@ -54,6 +53,18 @@ public class OS {
             evict(pageToEvict);
         }
         return ram.addEntry(address, isDirty, data);
+    }
+
+    //OS resets all ref bits in page table every 10 instructions
+
+    public void resetAllRef() {
+        for (int x=0; x<256; x++) {
+            table.resetRefBit(x);
+        }
+    }
+
+    public void setPageTable (PageTable pt) {
+        this.table = pt;
     }
 
     private void evict(PageFrame pageFrameToEvict) throws IOException {
@@ -91,12 +102,5 @@ public class OS {
             writeToFile.close();
         }
 
-    }
-
-    //OS resets all ref bits in page table every 10 instructions
-    public void resetAllRef() {
-        for (int x=0; x<256; x++) {
-            table.resetRefBit(x);
-        }
     }
 }
