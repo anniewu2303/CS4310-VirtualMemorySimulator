@@ -30,10 +30,10 @@ public class CPU {
     private OS os;
     private int counter;
 
-    public CPU(String pageFilesPath) {
-        this.csv = new CSV();
-        this.os = new OS(pageFilesPath);
-        this.mmu = new MMU(this.os, pageFilesPath);
+    public CPU(String pageFilesPath, CSV csv) {
+        this.csv = csv;
+        this.os = new OS(pageFilesPath, csv);
+        this.mmu = new MMU(this.os, pageFilesPath, csv);
     }
 
     /**
@@ -47,11 +47,6 @@ public class CPU {
         File file = new File(testFilePath);
         Scanner testFile = new Scanner(file);
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
-
-        //split file name and extension
-        String fileName = file.getName().split("\\.")[0] + ".csv";
-        System.out.println("Output file: " + fileName);
-        csv.initializeCSV(fileName);
 
         counter = 0;
         while (testFile.hasNextLine()) {

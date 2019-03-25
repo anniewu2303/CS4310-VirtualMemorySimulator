@@ -23,12 +23,16 @@ public class VMSimDriver {
         String pageFilesPath = "page_files";
         createWorkingSet(pageFilesPath);
 
-        CPU cpu = new CPU(pageFilesPath);
-
         // ie. test_files/test_1.txt
         Scanner scan = new Scanner(System.in);
         System.out.print("Test File Path: ");
         String testFilePath = scan.next();
+
+        String fileName = testFilePath.split("\\.")[0] + ".csv";
+        System.out.println("Output file: " + fileName);
+        CSV csv = new CSV(fileName);
+
+        CPU cpu = new CPU(pageFilesPath, csv);
         cpu.processFile(testFilePath);
     }
 

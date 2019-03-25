@@ -34,7 +34,7 @@ public class CSV {
      * @param outputFile
      * @throws FileNotFoundException
      */
-    public void initializeCSV(String outputFile) throws FileNotFoundException {
+    public CSV (String outputFile) throws FileNotFoundException {
         File file = new File(outputFile);
         FileOutputStream output = new FileOutputStream(file);
         csv = new PrintWriter(output);
