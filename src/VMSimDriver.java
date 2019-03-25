@@ -28,7 +28,7 @@ public class VMSimDriver {
         System.out.print("Test File Path: ");
         String testFilePath = scan.next();
 
-        String fileName = testFilePath.split("\\.")[0] + ".csv";
+        String fileName = testFilePath.split("\\.|/")[1] + ".csv";
         System.out.println("Output file: " + fileName);
         CSV csv = new CSV(fileName);
 

@@ -133,8 +133,8 @@ public class CSV {
         if (address != null && rw != null && value != null && soft != null && hard != null &&
                 hit != null && evictedPageNumber != null && dirty != null) {
 
-            csv.println(address + ", " + rw + ", " + value + ", " + soft + ", " + hard + ", " +
-                    hit + ", " + evictedPageNumber + ", " + dirty);
+            csv.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", address, rw, value, soft, hard, hit, evictedPageNumber, dirty);
+            System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s\n", address, rw, value, soft, hard, hit, evictedPageNumber, dirty);
 
             address = null;
             rw = null;
