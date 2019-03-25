@@ -23,10 +23,10 @@ public class OS {
     private PageTable table;
     private CSV csv;
 
-    public OS(String pageFilesPath) {
+    public OS(String pageFilesPath, CSV csv) {
         this.pageFilesPath = pageFilesPath;
         this.ram = new PhysicalMemory();
-        this.csv = new CSV();
+        this.csv = csv;
     }
 
     // Clock Algorithm
