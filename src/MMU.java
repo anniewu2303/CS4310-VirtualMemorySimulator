@@ -123,7 +123,7 @@ public class MMU {
      * @param isDirty
      * @return
      */
-    private int getFrameNumber(String address, String vpn, boolean isDirty) {
+    private int getFrameNumber(String address, String vpn, boolean isDirty) throws IOException {
         // Check TLB
         TlbEntry tlbEntry = tlb.getTLBEntry(vpn);
 

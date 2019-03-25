@@ -21,6 +21,7 @@ import java.util.Scanner;
 public class VMSimDriver {
     public static void main(String[] args) throws IOException {
         String pageFilesPath = "page_files";
+        System.out.println("Creating working set...");
         createWorkingSet(pageFilesPath);
 
         CPU cpu = new CPU(pageFilesPath);

@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * @author: Joshua Chen, Annie Wu
  * @date Mar 24, 2019
@@ -15,6 +17,9 @@
 public class OS {
     private PhysicalMemory ram;
     private PageTable pageTable;
+    private TlbEntry tlbEntry[];
+    private MMU mmu;
+    private CSV csv;
     private int clockIndex = 0;
 
     public OS() {
@@ -22,7 +27,7 @@ public class OS {
     }
 
     // Clock Algorithm
-    public int addEntry(String address) {
+    public int addEntry(String address) throws IOException {
         int pfn = ram.addEntry(address);
 
         // Clock is Full
@@ -48,8 +53,19 @@ public class OS {
         return pfn;
     }
 
-    private void evict(PageFrame pageToEvict) {
-        pageToEvict.setPhysAddr(-1);
+    private void evict(PageFrame pageFrameToEvict) {
+        int frameToEvict = pageFrameToEvict.getPhysAddr();
+        int frameNumber = ram.getPageFrameNum(pageFrameToEvict);
+        String vpn = Integer.toHexString(frameNumber);
+        int pageNum = Integer.parseInt(vpn, 16);
+
+        //if dirty bit is set, write evicted page back to disk
+        if (pageTable.getDirtyBit(vpn) == true) {
+            pageTable.update(vpn, -1, false);
+        }
+
+//        csv.evictedPageNumber();
+//        csv.dirty(pageTable.getDirtyBit(vpn));
     }
 
     //OS resets all ref bits in page table every 10 instructions

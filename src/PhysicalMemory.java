@@ -17,6 +17,7 @@ public class PhysicalMemory {
     private static int DEFAULT_NUM_PAGE_FRAMES = 16;
     private static int DEFAULT_PAGE_SIZE = 256;    // 12 bits
     private int head;
+    private int address;
 
     public PhysicalMemory() {
         this(DEFAULT_NUM_PAGE_FRAMES, DEFAULT_PAGE_SIZE);
@@ -43,6 +44,21 @@ public class PhysicalMemory {
             head += 1;
         }
         return pfn;
+    }
+
+    /**
+     * Get page frame number from page frame.
+     * @param pageFrame
+     * @return
+     */
+    public int getPageFrameNum(PageFrame pageFrame) {
+        int frameNumber = -1;
+        for (int x=0; x<16; x++) {
+            if (ram[x][0] == pageFrame) {
+                frameNumber = x;
+            }
+        }
+        return frameNumber;
     }
 
     /**

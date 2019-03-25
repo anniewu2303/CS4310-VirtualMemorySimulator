@@ -60,18 +60,18 @@ public class CPU {
             switch (rw) {
                 // Read
                 case 0:
-//                    if (counter == 10) {
-//                        os.resetAllRef();
-//                    }
+                    if (counter == 10) {
+                        os.resetAllRef();
+                    }
 
                     mmu.read(address);
                     //log.printf("Read --  %s.pg Index (%s/%d): %d\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue);
                     break;
                 // Write
                 case 1:
-//                    if (counter == 10) {
-//                        os.resetAllRef();
-//                    }
+                    if (counter == 10) {
+                        os.resetAllRef();
+                    }
 
                     int newValue = Integer.parseInt(testFile.nextLine());
                     mmu.write(address, newValue);
