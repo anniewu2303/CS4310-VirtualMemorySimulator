@@ -30,29 +30,28 @@ public class OS {
 
     // Clock Algorithm
     public int addEntry(String address, boolean isDirty, int data) throws IOException {
-        int pfn = ram.addEntry(address, isDirty, data);
+        int head = ram.getHead();
 
         // Clock is Full
-        if (pfn == -1) {
+        if (head == ram.getNumPageFrames()) {
             PageFrame pageToEvict = null;
+            PageFrame headFrame = ram.getHeadFrame();
 
             while (pageToEvict == null) {
-                PageFrame temp = ram.getHead();
 
                 // If R bit is 1, set to 0 and move head
-                if (temp.isRef()) {
-                    temp.setRefBit(false);
+                if (headFrame.isRef()) {
+                    headFrame.setRefBit(false);
                 }
                 // If R bit is 0, evict page
                 else {
-                    pageToEvict = temp;
+                    pageToEvict = headFrame;
                 }
                 ram.moveHead();
             }
             evict(pageToEvict);
         }
-        pfn = ram.addEntry(address, isDirty, data);
-        return pfn;
+        return ram.addEntry(address, isDirty, data);
     }
 
     private void evict(PageFrame pageFrameToEvict) throws IOException {

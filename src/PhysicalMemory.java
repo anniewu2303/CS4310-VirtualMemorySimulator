@@ -17,7 +17,6 @@ public class PhysicalMemory {
     private static int DEFAULT_NUM_PAGE_FRAMES = 16;
     private static int DEFAULT_PAGE_SIZE = 256;    // 12 bits
     private int head;
-    private int address;
 
     public PhysicalMemory() {
         this(DEFAULT_NUM_PAGE_FRAMES, DEFAULT_PAGE_SIZE);
@@ -38,10 +37,10 @@ public class PhysicalMemory {
         int pfn = -1;
         int physAddr = Integer.parseInt(address, 16);
 
-        if (this.head < ram.length) {
+        if (this.head < ram.length - 1) {
             pfn = this.head;
             ram[this.head][0] = new PageFrame(isDirty, physAddr, data);
-            head += 1;
+            moveHead();
         }
         return pfn;
     }
@@ -66,8 +65,12 @@ public class PhysicalMemory {
      *
      * @return
      */
-    public PageFrame getHead() {
+    public PageFrame getHeadFrame() {
         return ram[head][0];
+    }
+
+    public int getHead() {
+        return this.head;
     }
 
     /**
@@ -79,5 +82,9 @@ public class PhysicalMemory {
         } else {
             head += 1;
         }
+    }
+
+    public int getNumPageFrames() {
+        return ram.length;
     }
 }

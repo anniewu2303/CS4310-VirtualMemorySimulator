@@ -21,7 +21,6 @@ import java.util.Scanner;
 public class VMSimDriver {
     public static void main(String[] args) throws IOException {
         String pageFilesPath = "page_files";
-        System.out.println("Creating working set...");
         createWorkingSet(pageFilesPath);
 
         CPU cpu = new CPU(pageFilesPath);
@@ -42,6 +41,8 @@ public class VMSimDriver {
     private static void createWorkingSet(String path) throws IOException {
         File pathDirectory = new File(path);
         String workSetDirectoryName = path.concat("_working_set");
+
+        System.out.println("Creating working set...");
 
         // Create Directory if it does not exist
         File directory = new File(workSetDirectoryName);
