@@ -71,7 +71,7 @@ public class MMU {
             }
             page.nextLine();
         }
-        System.out.println(value);
+        System.out.println("Value at address (" + address + "):" + value);
 
         int pageFrameNum = getFrameNumber(address, vpn, Integer.parseInt(value), false);
         csv.value(Integer.parseInt(value));
