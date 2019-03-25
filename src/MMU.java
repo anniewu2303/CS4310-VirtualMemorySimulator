@@ -35,15 +35,16 @@ import java.util.Scanner;
 public class MMU {
     private String pageFilesPath;
     private PageTable pageTable;    // Virtual Memory
-    private TLB tlb;
     private OS os;
+    private TLB tlb;
     private CSV csv;
 
     public MMU(OS os, String pageFilesPath) {
         this.pageTable = new PageTable();
         this.pageFilesPath = pageFilesPath;
-        this.tlb = new TLB();
         this.os = os;
+        this.os.setPageTable(this.pageTable);
+        this.tlb = new TLB();
         this.csv = new CSV();
     }
 
