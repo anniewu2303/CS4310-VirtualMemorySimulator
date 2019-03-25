@@ -37,6 +37,7 @@ public class MMU {
     private PageTable pageTable;    // Virtual Memory
     private TLB tlb;
     private OS os;
+    private CSV csv;
 
     public MMU(String pageFilesPath) {
         this.pageTable = new PageTable();
@@ -53,7 +54,7 @@ public class MMU {
      * @throws IOException
      */
     public void read(String address) throws IOException {
-        String result = null;
+        String value = null; //value to read
         String vpn = address.substring(0, 2);
         int pageFrameNum = getFrameNumber(address, vpn, false);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
@@ -64,12 +65,13 @@ public class MMU {
 
         for (int i = 0; page.hasNextLine(); i++) {
             if (i == offset) {
-                result = page.nextLine();
+                value = page.nextLine();
                 break;
             }
             page.nextLine();
         }
-        System.out.println(result);
+        System.out.println(value);
+//        csv.value(Integer.parseInt(value));
     }
 
     /**
@@ -81,6 +83,8 @@ public class MMU {
      * @throws IOException
      */
     public void write(String address, int newValue) throws IOException {
+//        csv.value(newValue);
+
         String vpn = address.substring(0, 2);
         int pageFrameNum = getFrameNumber(address, vpn, true);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
@@ -111,7 +115,7 @@ public class MMU {
     }
 
     /**
-     * Sets R bit on Read or Write
+     * Sets R bit on Read or Write,
      * Sets D bit on Write
      *
      * @param address
@@ -128,28 +132,50 @@ public class MMU {
             System.out.println("Hit");
             tlbEntry.setRefBit(true);
             tlbEntry.setDirtyBit(isDirty);
+
+//            csv.hit(true);
+//            csv.soft(false);
+//            csv.hard(false);
+//            csv.dirty(isDirty);
+
             return tlbEntry.getPageFrameNum();
         }
 
-        // Check Page Table
-        PageTableEntry ptEntry = pageTable.getPageTableEntry(vpn);
-
-        // Soft Miss
-        if (ptEntry != null) {
-            System.out.println("Soft Miss");
-            ptEntry.setRefBit(true);
-            ptEntry.setDirtyBit(isDirty);
-            tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
-            return ptEntry.getPageFrameNum();
-        }
-
-        // Hard Miss
         else {
-            System.out.println("Hard Miss");
-            int pageFrameNum = os.addEntry(address);
-            pageTable.update(vpn, pageFrameNum, isDirty);
-            tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
-            return pageFrameNum;
+            // Check Page Table
+            PageTableEntry ptEntry = pageTable.getPageTableEntry(vpn);
+
+            // Soft Miss
+            if (ptEntry != null) {
+                System.out.println("Soft Miss");
+                ptEntry.setRefBit(true);
+                ptEntry.setDirtyBit(isDirty);
+                tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
+                
+//            csv.soft(true);
+//            csv.hard(false);
+//            csv.hit(false);
+//            csv.evictedPageNumber("N/A");         //no evicted page
+//            csv.dirty(isDirty);
+
+                return ptEntry.getPageFrameNum();
+            }
+
+            // Hard Miss
+            else {
+                System.out.println("Hard Miss");
+                int pageFrameNum = os.addEntry(address);
+                pageTable.update(vpn, pageFrameNum, isDirty);
+                tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
+
+//            csv.hard(true);
+//            csv.soft(false);
+//            csv.hit(false);
+//            csv.evictedPageNumber(vpn);
+//            csv.dirty(isDirty);
+
+                return pageFrameNum;
+            }
         }
     }
 }

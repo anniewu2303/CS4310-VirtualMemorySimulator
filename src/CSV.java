@@ -1,24 +1,20 @@
 /**
- * Author:        Joshua Chen
- * Annie Wu
+ * @author: Joshua Chen, Annie Wu
+ * @date Mar 24, 2019
  * <p>
- * Assignment:    Program 2
- * Class:         CS 4310 - Operating Systems
- * Instructor:    Dominick Atanasio
- * Date:          24 March 2019
+ * Assignment:  Project 2 - Virtual Memory Simulator
+ * Class:       CS 4310 - Operating Systems
+ * Instructor:  Dominick Atanasio
  * <p>
- * - Your program will output the following information in a CSV file (with appropriate headers):
- * - The address,
- * - Read or write (0 or 1),
- * - The value read or written,
- * - Soft miss (0 = false, 1 = true),
- * - Hard miss (0 = false, 1 = true),
- * - A hit (0 = false, 1 = true),
- * - page number of the evicted page,
- * - was that page’s dirty bit set.
- * - The header of the CSV should be:
- * Address, r/w, value, soft, hard, hit, evicted_pg#, dirty_evicted_page
- * - There should be one csv for every test file.
+ * CSV Output File Contains:
+ * - Address
+ * - Read or Write (0 or 1)
+ * - Value that is Read or Written
+ * - Soft miss (0 = false, 1 = true)
+ * - Hard miss (0 = false, 1 = true)
+ * - Hit (0 = false, 1 = true)
+ * - Page Number of the Evicted Page
+ * - Dirty Bit of the Page Number
  */
 
 import java.io.FileNotFoundException;
@@ -27,7 +23,7 @@ import java.io.PrintStream;
 
 public class CSV {
 
-    private String address, rw, value, soft, hard, hit, evictedPageNumber, dirtyEvictedPage;
+    private String address, rw, value, soft, hard, hit, evictedPageNumber, dirty;
     private PrintStream csv;
     
     /*
@@ -37,7 +33,7 @@ public class CSV {
     /**
      * initialize test_#.csv with header
      *
-     * @param path
+     * @param outputfile
      * @throws FileNotFoundException
      */
     public void initializeCSV(String outputfile) throws FileNotFoundException {
@@ -70,8 +66,13 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void soft(int s) {
-        soft = s + "";
+    public void soft(boolean bool) {
+        if (bool == false) {
+            soft = "0";
+        }
+        else {
+            soft = "1";
+        }
         output();
     }
 
@@ -79,8 +80,13 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hard(int h) {
-        hard = h + "";
+    public void hard(boolean bool) {
+        if (bool == false) {
+            hard = "0";
+        }
+        else {
+            hard = "1";
+        }
         output();
     }
 
@@ -88,13 +94,18 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hit(int h) {
-        hit = h + "";
+    public void hit(boolean bool) {
+        if (bool == false) {
+            hit = "0";
+        }
+        else {
+            hit = "1";
+        }
         output();
     }
 
     /**
-     * Output page if evicted or N/A if none
+     * Output page number that is evicted or N/A if none
      *
      * @param evicted
      */
@@ -107,8 +118,13 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void dirtyEvictedPage(int d) {
-        dirtyEvictedPage = d + "";
+    public void dirty(boolean bool) {
+        if (bool == false) {
+            dirty = "0";
+        }
+        else {
+            dirty = "1";
+        }
         output();
     }
 
@@ -121,9 +137,10 @@ public class CSV {
      */
     public void output() {
         if (address != null && rw != null && value != null && soft != null && hard != null &&
-                hit != null && evictedPageNumber != null && dirtyEvictedPage != null) {
+                hit != null && evictedPageNumber != null && dirty != null) {
+
             csv.println(address + ", " + rw + ", " + value + ", " + soft + ", " + hard + ", " +
-                    hit + ", " + evictedPageNumber + ", " + dirtyEvictedPage);
+                        hit + ", " + evictedPageNumber + ", " + dirty);
 
             address = null;
             rw = null;
@@ -132,7 +149,7 @@ public class CSV {
             hard = null;
             hit = null;
             evictedPageNumber = null;
-            dirtyEvictedPage = null;
+            dirty = null;
         }
     }
 }
