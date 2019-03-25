@@ -25,7 +25,7 @@ public class OS {
 
     public OS(String pageFilesPath) {
         this.pageFilesPath = pageFilesPath;
-        ram = new PhysicalMemory();
+        this.ram = new PhysicalMemory();
     }
 
     // Clock Algorithm
