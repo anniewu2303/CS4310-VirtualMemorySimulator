@@ -28,7 +28,6 @@ public class CPU {
     private MMU mmu;
     private CSV csv;
     private OS os;
-    private int counter;
 
     public CPU(String pageFilesPath, CSV csv) {
         this.csv = csv;
@@ -46,9 +45,8 @@ public class CPU {
     public void processFile(String testFilePath) throws IOException {
         File file = new File(testFilePath);
         Scanner testFile = new Scanner(file);
-        //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
+        int counter = 0;
 
-        counter = 0;
         while (testFile.hasNextLine()) {
             int rw = Integer.parseInt(testFile.nextLine());
             String address = testFile.nextLine();
@@ -61,20 +59,18 @@ public class CPU {
                 case 0:
                     if (counter == 10) {
                         os.resetAllRef();
+                        counter = 0;
                     }
-
                     mmu.read(address);
-                    //log.printf("Read --  %s.pg Index (%s/%d): %d\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue);
                     break;
                 // Write
                 case 1:
                     if (counter == 10) {
                         os.resetAllRef();
+                        counter = 0;
                     }
-
                     int newValue = Integer.parseInt(testFile.nextLine());
                     mmu.write(address, newValue);
-                    //log.printf("Write --  %s.pg Index (%s/%d): (%d --> %d)\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue, newValue);
                     break;
                 default:
                     System.out.println("Problem With File Format");
