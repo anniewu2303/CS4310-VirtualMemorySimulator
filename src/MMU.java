@@ -133,7 +133,6 @@ public class MMU {
 
         // Hit
         if (tlbEntry != null) {
-            System.out.println("Hit");
             tlbEntry.setRefBit(true);
             tlbEntry.setDirtyBit(isDirty);
 
@@ -147,7 +146,6 @@ public class MMU {
 
             // Soft Miss
             if (ptEntry != null) {
-                System.out.println("Soft Miss");
                 ptEntry.setRefBit(true);
                 ptEntry.setDirtyBit(isDirty);
                 tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
@@ -161,7 +159,6 @@ public class MMU {
 
             // Hard Miss
             else {
-                System.out.println("Hard Miss");
                 int pageFrameNum = os.addEntry(address, isDirty, data);
                 pageTable.update(vpn, pageFrameNum, isDirty);
                 tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
