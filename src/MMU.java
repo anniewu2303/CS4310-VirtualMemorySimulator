@@ -137,9 +137,7 @@ public class MMU {
             tlbEntry.setRefBit(true);
             tlbEntry.setDirtyBit(isDirty);
 
-            csv.hit(true);
-            csv.soft(false);
-            csv.hard(false);
+            csv.hit();
             csv.dirty(isDirty);
 
             return tlbEntry.getPageFrameNum();
@@ -154,9 +152,7 @@ public class MMU {
                 ptEntry.setDirtyBit(isDirty);
                 tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
 
-                csv.soft(true);
-                csv.hard(false);
-                csv.hit(false);
+                csv.soft();
                 csv.evictedPageNumber("N/A");         //no evicted page
                 csv.dirty(isDirty);
 
@@ -170,9 +166,7 @@ public class MMU {
                 pageTable.update(vpn, pageFrameNum, isDirty);
                 tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
 
-                csv.hard(true);
-                csv.soft(false);
-                csv.hit(false);
+                csv.hard();
                 csv.evictedPageNumber(vpn);
                 csv.dirty(isDirty);
 
