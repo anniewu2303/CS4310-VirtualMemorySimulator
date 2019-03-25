@@ -50,10 +50,15 @@ public class PageTable {
      */
     public void update(String vpn, int frameNumber, boolean isDirty) {
         int pageNum = Integer.parseInt(vpn, 16);
-        pageTableEntries[pageNum].setPageFrameNum(frameNumber);
-        pageTableEntries[pageNum].setValidBit(true);          //valid
-        pageTableEntries[pageNum].setRefBit(true);            //just referenced
-        pageTableEntries[pageNum].setDirtyBit(isDirty);
+
+        if (pageTableEntries[pageNum] == null) {
+            pageTableEntries[pageNum] = new PageTableEntry(frameNumber, isDirty);
+        } else {
+            pageTableEntries[pageNum].setPageFrameNum(frameNumber);
+            pageTableEntries[pageNum].setValidBit(true);          //valid
+            pageTableEntries[pageNum].setRefBit(true);            //just referenced
+            pageTableEntries[pageNum].setDirtyBit(isDirty);
+        }
     }
 
     /**
