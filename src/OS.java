@@ -32,6 +32,7 @@ public class OS {
     // Clock Algorithm
     public int addEntry(String address, boolean isDirty, int data) throws IOException {
         int head = ram.getHead();
+        csv.evictedPageNumber("N/A");
 
         // Clock is Full
         if (head == ram.getNumPageFrames()) {
