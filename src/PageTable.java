@@ -50,6 +50,9 @@ public class PageTable {
      */
     public void update(String vpn, int frameNumber, boolean isDirty) {
         int pageNum = Integer.parseInt(vpn, 16);
+
+        System.out.println("vpn " + vpn + " pageNum " + pageNum + " frameNum " + frameNumber);
+
         pageTableEntries[pageNum].setPageFrameNum(frameNumber);
         pageTableEntries[pageNum].setValidBit(true);          //valid
         pageTableEntries[pageNum].setRefBit(true);            //just referenced
@@ -68,7 +71,7 @@ public class PageTable {
     }
 
     /**
-     * Set dirty bit to 1 at this vpn.
+     * Set dirty bit to true at this vpn.
      *
      * @param vpn
      */
@@ -83,13 +86,13 @@ public class PageTable {
      * @param vpn
      * @return
      */
-    public boolean getStartingRef(String vpn) {
+    public boolean getRefBit(String vpn) {
         int pageNum = Integer.parseInt(vpn, 16);
         return pageTableEntries[pageNum].isRef();
     }
 
     /**
-     * Sets reference bit to 1 at this vpn.
+     * Sets reference bit to true at this vpn.
      *
      * @param vpn
      */
@@ -99,12 +102,21 @@ public class PageTable {
     }
 
     /**
-     * Reset reference bit to 0 at this vpn.
+     * Reset reference bit to false at this vpn.
      *
      * @param vpn
      */
     public void resetRefBit(String vpn) {
         int pageNum = Integer.parseInt(vpn, 16);
+        pageTableEntries[pageNum].setRefBit(false);
+    }
+
+    /**
+     * Reset reference bit to false at this page number (index in array)
+     *
+     * @param pageNum
+     */
+    public void resetRefBit(int pageNum) {
         pageTableEntries[pageNum].setRefBit(false);
     }
 

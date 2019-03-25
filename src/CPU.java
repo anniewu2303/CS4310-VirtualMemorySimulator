@@ -27,10 +27,10 @@ import java.util.Scanner;
 public class CPU {
     private MMU mmu;
     private CSV csv;
+    private OS os;
+    private int counter;
 
-    public CPU(String pageFilesPath) {
-        this.mmu = new MMU(pageFilesPath);
-    }
+    public CPU(String pageFilesPath) { this.mmu = new MMU(pageFilesPath); }
 
     /**
      * Processes File.
@@ -45,24 +45,34 @@ public class CPU {
         //PrintWriter log = new PrintWriter("log.txt", "UTF-8");
 
         //split file name and extension
-        String fileName = file.getName().split("\\.")[0];
-        csv.initializeCSV(fileName + ".csv");
+        String fileName = file.getName().split("\\.")[0] + ".csv";
+        System.out.println("Output file: " + fileName);
+//        csv.initializeCSV(fileName);
 
+        counter = 0;
         while (testFile.hasNextLine()) {
             int rw = Integer.parseInt(testFile.nextLine());
             String address = testFile.nextLine();
 
-            csv.rw(rw);
-            csv.address(address);
+//            csv.rw(rw);
+//            csv.address(address);
 
             switch (rw) {
                 // Read
                 case 0:
+//                    if (counter == 10) {
+//                        os.resetAllRef();
+//                    }
+
                     mmu.read(address);
                     //log.printf("Read --  %s.pg Index (%s/%d): %d\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue);
                     break;
                 // Write
                 case 1:
+//                    if (counter == 10) {
+//                        os.resetAllRef();
+//                    }
+
                     int newValue = Integer.parseInt(testFile.nextLine());
                     mmu.write(address, newValue);
                     //log.printf("Write --  %s.pg Index (%s/%d): (%d --> %d)\n", address.substring(0, 2), address.substring(2, 4), pageIndex, currValue, newValue);
@@ -70,6 +80,8 @@ public class CPU {
                 default:
                     System.out.println("Problem With File Format");
             }
+//            counter++;
+//            csv.output();
         }
     }
 }

@@ -14,6 +14,8 @@
 
 public class OS {
     private PhysicalMemory ram;
+    private PageTable pageTable;
+    private int clockIndex = 0;
 
     public OS() {
         ram = new PhysicalMemory();
@@ -47,6 +49,13 @@ public class OS {
     }
 
     private void evict(PageFrame pageToEvict) {
-        /* EVICT PAGE HERE*/
+        pageToEvict.setPhysAddr(-1);
+    }
+
+    //OS resets all ref bits in page table every 10 instructions
+    public void resetAllRef() {
+        for (int x=0; x<256; x++) {
+            pageTable.resetRefBit(x);
+        }
     }
 }
