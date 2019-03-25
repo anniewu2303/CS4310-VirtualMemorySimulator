@@ -141,9 +141,7 @@ public class MMU {
 //            csv.dirty(isDirty);
 
             return tlbEntry.getPageFrameNum();
-        }
-
-        else {
+        } else {
             // Check Page Table
             PageTableEntry ptEntry = pageTable.getPageTableEntry(vpn);
 
@@ -153,7 +151,7 @@ public class MMU {
                 ptEntry.setRefBit(true);
                 ptEntry.setDirtyBit(isDirty);
                 tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
-                
+
 //            csv.soft(true);
 //            csv.hard(false);
 //            csv.hit(false);

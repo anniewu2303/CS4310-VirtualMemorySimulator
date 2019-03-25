@@ -47,12 +47,13 @@ public class PhysicalMemory {
 
     /**
      * Get page frame number from page frame.
+     *
      * @param pageFrame
      * @return
      */
     public int getPageFrameNum(PageFrame pageFrame) {
         int frameNumber = -1;
-        for (int x=0; x<16; x++) {
+        for (int x = 0; x < 16; x++) {
             if (ram[x][0] == pageFrame) {
                 frameNumber = x;
             }
@@ -69,6 +70,11 @@ public class PhysicalMemory {
         return ram[head][0];
     }
 
+    /**
+     * Return int value of head.
+     *
+     * @return
+     */
     public int getHead() {
         return this.head;
     }
@@ -84,6 +90,11 @@ public class PhysicalMemory {
         }
     }
 
+    /**
+     * Return max number of page frames.
+     *
+     * @return
+     */
     public int getNumPageFrames() {
         return ram.length;
     }

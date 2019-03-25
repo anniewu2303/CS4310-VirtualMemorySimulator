@@ -28,7 +28,9 @@ public class PageTableEntry {
         return validBit;
     }
 
-    public void setValidBit(boolean validBit) { this.validBit = validBit; }
+    public void setValidBit(boolean validBit) {
+        this.validBit = validBit;
+    }
 
     public boolean isRef() {
         return refBit;
@@ -50,5 +52,7 @@ public class PageTableEntry {
         return pageFrameNum;
     }
 
-    public void setPageFrameNum(int pageFrameNum) { this.pageFrameNum = pageFrameNum; }
+    public void setPageFrameNum(int pageFrameNum) {
+        this.pageFrameNum = pageFrameNum;
+    }
 }

@@ -93,6 +93,6 @@ public class OS {
 
     //OS resets all ref bits in page table every 10 instructions
     public void resetAllRef() {
-      /* Reset Ref bits Here*/
+        /* Reset Ref bits Here*/
     }
 }

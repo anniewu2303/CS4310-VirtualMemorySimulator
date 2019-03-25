@@ -30,7 +30,9 @@ public class CPU {
     private OS os;
     private int counter;
 
-    public CPU(String pageFilesPath) { this.mmu = new MMU(pageFilesPath); }
+    public CPU(String pageFilesPath) {
+        this.mmu = new MMU(pageFilesPath);
+    }
 
     /**
      * Processes File.
