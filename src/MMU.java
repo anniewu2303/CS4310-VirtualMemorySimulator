@@ -137,6 +137,7 @@ public class MMU {
             tlbEntry.setDirtyBit(isDirty);
 
             csv.hit();
+            csv.evictedPageNumber("N/A");         //no evicted page
             csv.dirty(isDirty);
 
             return tlbEntry.getPageFrameNum();
