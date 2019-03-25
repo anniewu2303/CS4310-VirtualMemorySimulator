@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -15,20 +18,19 @@ import java.io.IOException;
  */
 
 public class OS {
+    private String pageFilesPath;
     private PhysicalMemory ram;
-    private PageTable pageTable;
-    private TlbEntry tlbEntry[];
-    private MMU mmu;
     private CSV csv;
     private int clockIndex = 0;
 
-    public OS() {
+    public OS(String pageFilesPath) {
+        this.pageFilesPath = pageFilesPath;
         ram = new PhysicalMemory();
     }
 
     // Clock Algorithm
-    public int addEntry(String address) throws IOException {
-        int pfn = ram.addEntry(address);
+    public int addEntry(String address, boolean isDirty, int data) throws IOException {
+        int pfn = ram.addEntry(address, isDirty, data);
 
         // Clock is Full
         if (pfn == -1) {
@@ -49,29 +51,49 @@ public class OS {
             }
             evict(pageToEvict);
         }
-        pfn = ram.addEntry(address);
+        pfn = ram.addEntry(address, isDirty, data);
         return pfn;
     }
 
-    private void evict(PageFrame pageFrameToEvict) {
-        int frameToEvict = pageFrameToEvict.getPhysAddr();
-        int frameNumber = ram.getPageFrameNum(pageFrameToEvict);
-        String vpn = Integer.toHexString(frameNumber);
-        int pageNum = Integer.parseInt(vpn, 16);
-
-        //if dirty bit is set, write evicted page back to disk
-        if (pageTable.getDirtyBit(vpn) == true) {
-            pageTable.update(vpn, -1, false);
-        }
+    private void evict(PageFrame pageFrameToEvict) throws IOException {
+        String address = Integer.toHexString(pageFrameToEvict.getPhysAddr());
+        String vpn = address.substring(0, 2);
+        //int pageFrameNum = ram.getPageFrameNum(pageFrameToEvict);
+        int offset = Integer.parseInt(address.substring(2, 4), 16);
 
 //        csv.evictedPageNumber();
 //        csv.dirty(pageTable.getDirtyBit(vpn));
+
+        // Write to Disk if page frame is dirty
+        if (pageFrameToEvict.isDirty()) {
+            String pageFileName = pageFilesPath + "_working_set/" + vpn + ".pg";
+            BufferedReader reader = new BufferedReader(new FileReader(pageFileName));
+
+            // Copy Line or Write Value to File
+            StringBuffer strBuffer = new StringBuffer();
+            String line;
+            int lineNum = 0;
+            while ((line = reader.readLine()) != null) {
+                // Replace Line with New Value
+                if (lineNum == offset - 1) {
+                    strBuffer.append(pageFrameToEvict.getData() + "\n");
+                } else {
+                    strBuffer.append(line + "\n");
+                }
+                lineNum += 1;
+            }
+            String inputStr = strBuffer.toString();
+            reader.close();
+
+            FileOutputStream writeToFile = new FileOutputStream(pageFileName);
+            writeToFile.write(inputStr.getBytes());
+            writeToFile.close();
+        }
+
     }
 
     //OS resets all ref bits in page table every 10 instructions
     public void resetAllRef() {
-        for (int x=0; x<256; x++) {
-            pageTable.resetRefBit(x);
-        }
+      /* Reset Ref bits Here*/
     }
 }

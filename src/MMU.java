@@ -43,7 +43,7 @@ public class MMU {
         this.pageTable = new PageTable();
         this.pageFilesPath = pageFilesPath;
         this.tlb = new TLB();
-        this.os = new OS();
+        this.os = new OS(pageFilesPath);
     }
 
     /**
@@ -56,7 +56,6 @@ public class MMU {
     public void read(String address) throws IOException {
         String value = null; //value to read
         String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(address, vpn, false);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
 
         // Page to Read From
@@ -71,6 +70,8 @@ public class MMU {
             page.nextLine();
         }
         System.out.println(value);
+
+        int pageFrameNum = getFrameNumber(address, vpn, Integer.parseInt(value), false);
 //        csv.value(Integer.parseInt(value));
     }
 
@@ -86,7 +87,6 @@ public class MMU {
 //        csv.value(newValue);
 
         String vpn = address.substring(0, 2);
-        int pageFrameNum = getFrameNumber(address, vpn, true);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
 
         // Page to Write To
@@ -112,6 +112,8 @@ public class MMU {
         FileOutputStream writeToFile = new FileOutputStream(pageFileName);
         writeToFile.write(inputStr.getBytes());
         writeToFile.close();
+
+        int pageFrameNum = getFrameNumber(address, vpn, newValue, true);
     }
 
     /**
@@ -123,7 +125,7 @@ public class MMU {
      * @param isDirty
      * @return
      */
-    private int getFrameNumber(String address, String vpn, boolean isDirty) throws IOException {
+    private int getFrameNumber(String address, String vpn, int data, boolean isDirty) throws IOException {
         // Check TLB
         TlbEntry tlbEntry = tlb.getTLBEntry(vpn);
 
@@ -164,7 +166,7 @@ public class MMU {
             // Hard Miss
             else {
                 System.out.println("Hard Miss");
-                int pageFrameNum = os.addEntry(address);
+                int pageFrameNum = os.addEntry(address, isDirty, data);
                 pageTable.update(vpn, pageFrameNum, isDirty);
                 tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
 

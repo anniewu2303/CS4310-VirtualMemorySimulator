@@ -34,13 +34,13 @@ public class PhysicalMemory {
      * @param address
      * @return
      */
-    public int addEntry(String address) {
+    public int addEntry(String address, boolean isDirty, int data) {
         int pfn = -1;
         int physAddr = Integer.parseInt(address, 16);
 
         if (this.head < ram.length) {
             pfn = this.head;
-            ram[this.head][0] = new PageFrame(physAddr);
+            ram[this.head][0] = new PageFrame(isDirty, physAddr, data);
             head += 1;
         }
         return pfn;
