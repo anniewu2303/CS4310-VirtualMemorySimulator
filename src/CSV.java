@@ -17,31 +17,29 @@
  * - Dirty Bit of the Page Number
  */
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 public class CSV {
 
     private String address, rw, value, soft, hard, hit, evictedPageNumber, dirty;
-    private PrintStream csv;
+    private PrintWriter csv;
     
     /*
         + "" turns the parameter into a string for writing to output file
     */
 
     /**
-     * initialize test_#.csv with header
+     * Initialize test_#.csv File
      *
-     * @param outputfile
+     * @param outputFile
      * @throws FileNotFoundException
      */
-    public void initializeCSV(String outputfile) throws FileNotFoundException {
-        FileOutputStream output = new FileOutputStream(outputfile);
-        csv = new PrintStream(output);
+    public void initializeCSV(String outputFile) throws FileNotFoundException {
+        File file = new File(outputFile);
+        FileOutputStream output = new FileOutputStream(file);
+        csv = new PrintWriter(output);
         header();
     }
-
 
     public void address(String a) {
         address = a;
@@ -66,8 +64,8 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void soft(boolean bool) {
-        if (bool == false) {
+    public void soft(boolean isSoft) {
+        if (!isSoft) {
             soft = "0";
         } else {
             soft = "1";
@@ -79,8 +77,8 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hard(boolean bool) {
-        if (bool == false) {
+    public void hard(boolean isHard) {
+        if (!isHard) {
             hard = "0";
         } else {
             hard = "1";
@@ -92,8 +90,8 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void hit(boolean bool) {
-        if (bool == false) {
+    public void hit(boolean isHit) {
+        if (!isHit) {
             hit = "0";
         } else {
             hit = "1";
@@ -115,8 +113,8 @@ public class CSV {
      * 0 = false
      * 1 = true
      */
-    public void dirty(boolean bool) {
-        if (bool == false) {
+    public void dirty(boolean isDirty) {
+        if (!isDirty) {
             dirty = "0";
         } else {
             dirty = "1";

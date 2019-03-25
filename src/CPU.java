@@ -32,6 +32,8 @@ public class CPU {
 
     public CPU(String pageFilesPath) {
         this.mmu = new MMU(pageFilesPath);
+        this.csv = new CSV();
+        this.os = new OS(pageFilesPath);
     }
 
     /**
@@ -49,15 +51,15 @@ public class CPU {
         //split file name and extension
         String fileName = file.getName().split("\\.")[0] + ".csv";
         System.out.println("Output file: " + fileName);
-//        csv.initializeCSV(fileName);
+        csv.initializeCSV(fileName);
 
         counter = 0;
         while (testFile.hasNextLine()) {
             int rw = Integer.parseInt(testFile.nextLine());
             String address = testFile.nextLine();
 
-//            csv.rw(rw);
-//            csv.address(address);
+            csv.rw(rw);
+            csv.address(address);
 
             switch (rw) {
                 // Read
@@ -82,8 +84,8 @@ public class CPU {
                 default:
                     System.out.println("Problem With File Format");
             }
-//            counter++;
-//            csv.output();
+            csv.output();
+            counter++;
         }
     }
 }
