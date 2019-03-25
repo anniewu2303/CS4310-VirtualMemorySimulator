@@ -44,6 +44,7 @@ public class MMU {
         this.pageFilesPath = pageFilesPath;
         this.tlb = new TLB();
         this.os = new OS(pageFilesPath);
+        this.csv = new CSV();
     }
 
     /**
@@ -72,7 +73,7 @@ public class MMU {
         System.out.println(value);
 
         int pageFrameNum = getFrameNumber(address, vpn, Integer.parseInt(value), false);
-//        csv.value(Integer.parseInt(value));
+        csv.value(Integer.parseInt(value));
     }
 
     /**
@@ -84,7 +85,7 @@ public class MMU {
      * @throws IOException
      */
     public void write(String address, int newValue) throws IOException {
-//        csv.value(newValue);
+        csv.value(newValue);
 
         String vpn = address.substring(0, 2);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
@@ -135,10 +136,10 @@ public class MMU {
             tlbEntry.setRefBit(true);
             tlbEntry.setDirtyBit(isDirty);
 
-//            csv.hit(true);
-//            csv.soft(false);
-//            csv.hard(false);
-//            csv.dirty(isDirty);
+            csv.hit(true);
+            csv.soft(false);
+            csv.hard(false);
+            csv.dirty(isDirty);
 
             return tlbEntry.getPageFrameNum();
         } else {
@@ -152,11 +153,11 @@ public class MMU {
                 ptEntry.setDirtyBit(isDirty);
                 tlb.addEntry(vpn, ptEntry.getPageFrameNum(), isDirty);   // add to TLB (dirty)
 
-//            csv.soft(true);
-//            csv.hard(false);
-//            csv.hit(false);
-//            csv.evictedPageNumber("N/A");         //no evicted page
-//            csv.dirty(isDirty);
+                csv.soft(true);
+                csv.hard(false);
+                csv.hit(false);
+                csv.evictedPageNumber("N/A");         //no evicted page
+                csv.dirty(isDirty);
 
                 return ptEntry.getPageFrameNum();
             }
@@ -168,11 +169,11 @@ public class MMU {
                 pageTable.update(vpn, pageFrameNum, isDirty);
                 tlb.addEntry(vpn, pageFrameNum, isDirty);               // add to TLB (dirty)
 
-//            csv.hard(true);
-//            csv.soft(false);
-//            csv.hit(false);
-//            csv.evictedPageNumber(vpn);
-//            csv.dirty(isDirty);
+                csv.hard(true);
+                csv.soft(false);
+                csv.hit(false);
+                csv.evictedPageNumber(vpn);
+                csv.dirty(isDirty);
 
                 return pageFrameNum;
             }

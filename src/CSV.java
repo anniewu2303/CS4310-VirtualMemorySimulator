@@ -17,31 +17,29 @@
  * - Dirty Bit of the Page Number
  */
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 public class CSV {
 
     private String address, rw, value, soft, hard, hit, evictedPageNumber, dirty;
-    private PrintStream csv;
+    private PrintWriter csv;
     
     /*
         + "" turns the parameter into a string for writing to output file
     */
 
     /**
-     * initialize test_#.csv with header
+     * Initialize test_#.csv File
      *
-     * @param outputfile
+     * @param outputFile
      * @throws FileNotFoundException
      */
-    public void initializeCSV(String outputfile) throws FileNotFoundException {
-        FileOutputStream output = new FileOutputStream(outputfile);
-        csv = new PrintStream(output);
+    public void initializeCSV(String outputFile) throws FileNotFoundException {
+        File file = new File(outputFile);
+        FileOutputStream output = new FileOutputStream(file);
+        csv = new PrintWriter(output);
         header();
     }
-
 
     public void address(String a) {
         address = a;

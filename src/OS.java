@@ -20,12 +20,14 @@ import java.io.IOException;
 public class OS {
     private String pageFilesPath;
     private PhysicalMemory ram;
+    private PageTable table;
     private CSV csv;
     private int clockIndex = 0;
 
     public OS(String pageFilesPath) {
         this.pageFilesPath = pageFilesPath;
         this.ram = new PhysicalMemory();
+        this.csv = new CSV();
     }
 
     // Clock Algorithm
@@ -60,8 +62,8 @@ public class OS {
         //int pageFrameNum = ram.getPageFrameNum(pageFrameToEvict);
         int offset = Integer.parseInt(address.substring(2, 4), 16);
 
-//        csv.evictedPageNumber();
-//        csv.dirty(pageTable.getDirtyBit(vpn));
+        csv.evictedPageNumber(vpn);
+        csv.dirty(pageFrameToEvict.isDirty());
 
         // Write to Disk if page frame is dirty
         if (pageFrameToEvict.isDirty()) {
@@ -93,6 +95,8 @@ public class OS {
 
     //OS resets all ref bits in page table every 10 instructions
     public void resetAllRef() {
-        /* Reset Ref bits Here*/
+        for (int x=0; x<256; x++) {
+            table.resetRefBit(x);
+        }
     }
 }
