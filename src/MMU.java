@@ -140,6 +140,7 @@ public class MMU {
             csv.hit(true);
             csv.soft(false);
             csv.hard(false);
+            csv.evictedPageNumber("N/A");         //no evicted page
             csv.dirty(isDirty);
 
             return tlbEntry.getPageFrameNum();
