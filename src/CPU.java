@@ -31,9 +31,9 @@ public class CPU {
     private int counter;
 
     public CPU(String pageFilesPath) {
-        this.mmu = new MMU(pageFilesPath);
         this.csv = new CSV();
         this.os = new OS(pageFilesPath);
+        this.mmu = new MMU(this.os, pageFilesPath);
     }
 
     /**

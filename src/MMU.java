@@ -39,11 +39,11 @@ public class MMU {
     private OS os;
     private CSV csv;
 
-    public MMU(String pageFilesPath) {
+    public MMU(OS os, String pageFilesPath) {
         this.pageTable = new PageTable();
         this.pageFilesPath = pageFilesPath;
         this.tlb = new TLB();
-        this.os = new OS(pageFilesPath);
+        this.os = os;
         this.csv = new CSV();
     }
 
