@@ -69,8 +69,7 @@ public class CSV {
     public void soft(boolean bool) {
         if (bool == false) {
             soft = "0";
-        }
-        else {
+        } else {
             soft = "1";
         }
         output();
@@ -83,8 +82,7 @@ public class CSV {
     public void hard(boolean bool) {
         if (bool == false) {
             hard = "0";
-        }
-        else {
+        } else {
             hard = "1";
         }
         output();
@@ -97,8 +95,7 @@ public class CSV {
     public void hit(boolean bool) {
         if (bool == false) {
             hit = "0";
-        }
-        else {
+        } else {
             hit = "1";
         }
         output();
@@ -121,8 +118,7 @@ public class CSV {
     public void dirty(boolean bool) {
         if (bool == false) {
             dirty = "0";
-        }
-        else {
+        } else {
             dirty = "1";
         }
         output();
@@ -140,7 +136,7 @@ public class CSV {
                 hit != null && evictedPageNumber != null && dirty != null) {
 
             csv.println(address + ", " + rw + ", " + value + ", " + soft + ", " + hard + ", " +
-                        hit + ", " + evictedPageNumber + ", " + dirty);
+                    hit + ", " + evictedPageNumber + ", " + dirty);
 
             address = null;
             rw = null;

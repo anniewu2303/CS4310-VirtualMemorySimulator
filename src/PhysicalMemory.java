@@ -33,16 +33,32 @@ public class PhysicalMemory {
      * @param address
      * @return
      */
-    public int addEntry(String address) {
+    public int addEntry(String address, boolean isDirty, int data) {
         int pfn = -1;
         int physAddr = Integer.parseInt(address, 16);
 
-        if (this.head < ram.length) {
+        if (this.head < ram.length - 1) {
             pfn = this.head;
-            ram[this.head][0] = new PageFrame(physAddr);
-            head += 1;
+            ram[this.head][0] = new PageFrame(isDirty, physAddr, data);
+            moveHead();
         }
         return pfn;
+    }
+
+    /**
+     * Get page frame number from page frame.
+     *
+     * @param pageFrame
+     * @return
+     */
+    public int getPageFrameNum(PageFrame pageFrame) {
+        int frameNumber = -1;
+        for (int x = 0; x < 16; x++) {
+            if (ram[x][0] == pageFrame) {
+                frameNumber = x;
+            }
+        }
+        return frameNumber;
     }
 
     /**
@@ -50,8 +66,17 @@ public class PhysicalMemory {
      *
      * @return
      */
-    public PageFrame getHead() {
+    public PageFrame getHeadFrame() {
         return ram[head][0];
+    }
+
+    /**
+     * Return int value of head.
+     *
+     * @return
+     */
+    public int getHead() {
+        return this.head;
     }
 
     /**
@@ -63,5 +88,14 @@ public class PhysicalMemory {
         } else {
             head += 1;
         }
+    }
+
+    /**
+     * Return max number of page frames.
+     *
+     * @return
+     */
+    public int getNumPageFrames() {
+        return ram.length;
     }
 }

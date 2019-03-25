@@ -42,6 +42,8 @@ public class VMSimDriver {
         File pathDirectory = new File(path);
         String workSetDirectoryName = path.concat("_working_set");
 
+        System.out.println("Creating working set...");
+
         // Create Directory if it does not exist
         File directory = new File(workSetDirectoryName);
         if (!directory.exists()) {

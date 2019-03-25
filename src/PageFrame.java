@@ -5,13 +5,23 @@
  * Represents Individual Page Frames for Physical Memory.
  */
 public class PageFrame {
-    private PageFrame next;
-    private boolean refBit;
+    private boolean refBit, dirtyBit;
     private int physAddr;
+    private int data;
 
-    public PageFrame(int physAddr) {
+    public PageFrame(boolean isDirty, int physAddr, int data) {
         this.refBit = true;
+        this.dirtyBit = isDirty;
         this.physAddr = physAddr;
+        this.data = data;
+    }
+
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
     }
 
     public boolean isRef() {
@@ -26,15 +36,19 @@ public class PageFrame {
         return physAddr;
     }
 
+    public boolean isRefBit() {
+        return refBit;
+    }
+
+    public boolean isDirty() {
+        return dirtyBit;
+    }
+
+    public void setDirtyBit(boolean dirtyBit) {
+        this.dirtyBit = dirtyBit;
+    }
+
     public void setPhysAddr(int physAddr) {
         this.physAddr = physAddr;
-    }
-
-    public PageFrame getNext() {
-        return next;
-    }
-
-    public void setNext(PageFrame next) {
-        this.next = next;
     }
 }
